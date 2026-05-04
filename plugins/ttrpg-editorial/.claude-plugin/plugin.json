@@ -1,0 +1,11 @@
+{
+  "name": "ttrpg-editorial",
+  "version": "0.1.0",
+  "description": "Audit éditorial pour suppléments et fiction JDR : revue de publication, chasse aux clichés, tics stylistiques récurrents, audit de noms génériques.",
+  "author": {
+    "name": "Christian Maugé",
+    "url": "https://github.com/camauger"
+  },
+  "homepage": "https://github.com/camauger/ludomancien-skills",
+  "license": "MIT"
+}

@@ -1,0 +1,48 @@
+{
+  "name": "ludomancien-skills",
+  "owner": {
+    "name": "Christian Maugé",
+    "url": "https://github.com/camauger"
+  },
+  "metadata": {
+    "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, tables aléatoires, audit éditorial, et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "ttrpg-creation",
+      "source": "./plugins/ttrpg-creation",
+      "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud.",
+      "category": "ttrpg",
+      "tags": ["dnd", "5e", "scenario", "npc", "worldbuilding", "gm-tools"]
+    },
+    {
+      "name": "ttrpg-editorial",
+      "source": "./plugins/ttrpg-editorial",
+      "description": "Audit éditorial pour suppléments et fiction JDR : revue de publication, chasse aux clichés, tics récurrents, noms génériques.",
+      "category": "writing",
+      "tags": ["editorial", "review", "ttrpg", "publishing"]
+    },
+    {
+      "name": "ttrpg-tables",
+      "source": "./plugins/ttrpg-tables",
+      "description": "Tables d'événements et de rencontres aléatoires (d100 et plus) pour environnements urbains dark fantasy.",
+      "category": "ttrpg",
+      "tags": ["random-tables", "encounters", "dark-fantasy", "urban"]
+    },
+    {
+      "name": "ttrpg-print",
+      "source": "./plugins/ttrpg-print",
+      "description": "Production print-ready : design typographique, prompts Midjourney pour illustrations JDR, audit de prompts, cartes de tarot.",
+      "category": "ttrpg",
+      "tags": ["print", "midjourney", "illustration", "design", "drivethrurpg"]
+    },
+    {
+      "name": "jdr-fr",
+      "source": "./plugins/jdr-fr",
+      "description": "Contenu francophone pour le JDR : articles de mots rares (jeuxderole.org), conseils fanzine, vocabulaire littéraire.",
+      "category": "ttrpg",
+      "tags": ["francophone", "ludomancien", "fanzine", "vocabulaire"]
+    }
+  ]
+}

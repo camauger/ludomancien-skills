@@ -1,0 +1,11 @@
+{
+  "name": "ttrpg-print",
+  "version": "0.1.0",
+  "description": "Production print-ready pour publications JDR : design typographique, prompts Midjourney, audit qualité de prompts, illustrations style tarot.",
+  "author": {
+    "name": "Christian Maugé",
+    "url": "https://github.com/camauger"
+  },
+  "homepage": "https://github.com/camauger/ludomancien-skills",
+  "license": "MIT"
+}

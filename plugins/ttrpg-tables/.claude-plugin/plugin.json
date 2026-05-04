@@ -1,0 +1,11 @@
+{
+  "name": "ttrpg-tables",
+  "version": "0.1.0",
+  "description": "Tables d'événements et de rencontres aléatoires (d100 et plus) pour environnements urbains dark fantasy. Inclut un script Python d'orchestration via l'API Anthropic.",
+  "author": {
+    "name": "Christian Maugé",
+    "url": "https://github.com/camauger"
+  },
+  "homepage": "https://github.com/camauger/ludomancien-skills",
+  "license": "MIT"
+}

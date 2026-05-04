@@ -1,0 +1,11 @@
+{
+  "name": "ttrpg-creation",
+  "version": "0.1.0",
+  "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud. D&D 5e (2024) par défaut, plusieurs skills system-agnostic.",
+  "author": {
+    "name": "Christian Maugé",
+    "url": "https://github.com/camauger"
+  },
+  "homepage": "https://github.com/camauger/ludomancien-skills",
+  "license": "MIT"
+}
