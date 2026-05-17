@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, tables aléatoires, audit éditorial, et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "plugins": [
     {
@@ -19,9 +19,9 @@
     {
       "name": "ttrpg-editorial",
       "source": "./plugins/ttrpg-editorial",
-      "description": "Audit éditorial pour suppléments et fiction JDR : revue de publication, chasse aux clichés, tics récurrents, noms génériques.",
+      "description": "Audit éditorial et playtest pour suppléments JDR : revue de publication, chasse aux clichés, tics récurrents, noms génériques, et simulation de playtest multi-passes.",
       "category": "writing",
-      "tags": ["editorial", "review", "ttrpg", "publishing"]
+      "tags": ["editorial", "review", "ttrpg", "publishing", "playtest"]
     },
     {
       "name": "ttrpg-tables",

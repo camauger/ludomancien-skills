@@ -1,7 +1,7 @@
 {
   "name": "ttrpg-editorial",
-  "version": "0.1.0",
-  "description": "Audit éditorial pour suppléments et fiction JDR : revue de publication, chasse aux clichés, tics stylistiques récurrents, audit de noms génériques.",
+  "version": "0.2.0",
+  "description": "Audit éditorial et playtest pour suppléments JDR : revue de publication, chasse aux clichés, tics stylistiques, noms génériques, et simulation de playtest multi-passes.",
   "author": {
     "name": "Christian Maugé",
     "url": "https://github.com/camauger"
