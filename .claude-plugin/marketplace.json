@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, monstres, objets magiques, sorts custom, donjons, encounters, tables aléatoires, audit éditorial, playtest, mise en marché, conversion entre systèmes (5e 2014 → 2024 / PF2e / OSR), audit mécanique de stat blocks, premier agent orchestrateur (ttrpg-publication-director pour le pipeline complet draft → launch), et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
-    "version": "0.9.0"
+    "version": "1.0.0"
   },
   "plugins": [
     {

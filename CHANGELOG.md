@@ -2,6 +2,41 @@
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet adhère au [versioning sémantique](https://semver.org/lang/fr/) par plugin.
 
+## [1.0.0] — 2026-05-19
+
+Première release stable. Le marketplace couvre 27 skills et 1 agent orchestrateur répartis sur 5 plugins, avec une documentation complète (top-level README, per-plugin READMEs, CONTRIBUTING.md, galerie d'exemples curatée).
+
+### Ajouts
+
+- **`examples/`** — galerie curatée d'outputs réels jugés exemplaires. Pas de fixtures synthétiques ni de démos pré-écrites : le mainteneur dépose un output quand il le juge bon, frontmatter minimal (skill, plugin, date, why), output collé brut. Voir `examples/README.md` pour le mécanisme de curation et `examples/TEMPLATE.md` pour ajouter un nouvel exemple. La galerie sert à la fois de vitrine concrète pour un nouveau visiteur et de référence calibrée pour détecter une dérive future d'un skill.
+- **`CONTRIBUTING.md`** — conventions complètes : philosophie skills vs agents, structure du repo, workflow d'ajout d'un skill (frontmatter, references/, validation), workflow d'ajout d'un agent (frontmatter avec tools/model, single-file), style et langue (français primaire, accents stricts, pas d'emojis), validation locale, versioning sémantique par plugin, style de commit, scope du marketplace.
+- **5 READMEs par plugin** : `plugins/ttrpg-creation/README.md`, `plugins/ttrpg-editorial/README.md`, `plugins/ttrpg-tables/README.md`, `plugins/ttrpg-print/README.md`, `plugins/jdr-fr/README.md`. Chacun liste ses skills (et son agent pour `ttrpg-editorial`), explique le workflow type quand pertinent, et pointe vers le top-level README et CONTRIBUTING.md.
+
+### Modifications
+
+- **`README.md`** : structure du repo enrichie pour montrer `examples/`, `CONTRIBUTING.md`, et les READMEs par plugin. Nouvelle section *Exemples* pointant vers `examples/README.md`. Note explicite sur les READMEs et CONTRIBUTING.md.
+- **Bumps de version vers v1.0.0** :
+  - `marketplace.json` : 0.9.0 → 1.0.0
+  - `plugins/ttrpg-creation/plugin.json` : 0.5.0 → 1.0.0
+  - `plugins/ttrpg-editorial/plugin.json` : 0.5.0 → 1.0.0
+  - `plugins/ttrpg-tables/plugin.json` : 0.1.0 → 1.0.0
+  - `plugins/ttrpg-print/plugin.json` : 0.1.0 → 1.0.0
+  - `plugins/jdr-fr/plugin.json` : 0.1.0 → 1.0.0
+
+### Note sur la curation d'exemples (pivot pendant la release)
+
+La version initialement prévue incluait un walkthrough synthétique de `ttrpg-publication-director` sur un manuscrit pré-écrit délibérément défectueux. Après réflexion, le format synthétique a été abandonné au profit d'une galerie curatée : un walkthrough synthétique vieillit mal (les skills évoluent, l'exemple dérive) alors qu'une galerie d'outputs réels jugés exemplaires reste utile dans le temps et reflète plus fidèlement ce que le marketplace produit. Le fixture initial (`examples/sample-5-room-dungeon.md`) a été supprimé.
+
+### Contrat de stabilité v1.0.0
+
+À partir de cette release :
+
+- **MAJOR** sera bumpé pour : renommage de skill, suppression, changement de signature majeur du SKILL.md ou d'un agent.
+- **MINOR** : ajout d'un skill ou agent, enrichissement substantiel (nouveau workflow, références ajoutées).
+- **PATCH** : corrections, clarifications de doc, ajustements de trigger phrases.
+
+Les `references/` internes des skills restent en libre évolution (ils ne font pas partie du contrat public).
+
 ## [0.9.0] — 2026-05-19
 
 ### Ajouts

@@ -1,6 +1,6 @@
 {
   "name": "ttrpg-editorial",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Audit éditorial, playtest, mise en marché et orchestration de pipeline pour suppléments JDR : revue de publication, chasse aux clichés, tics stylistiques, noms génériques, simulation de playtest multi-passes, évaluation commerciale (listing, pricing, visuels, positionnement DriveThruRPG), conversion entre systèmes (5e 2014 → 5e 2024 / 5e → PF2e / 5e → OSR / narratif), audit mécanique de stat blocks 5e 2024, et agent orchestrateur ttrpg-publication-director qui pilote le pipeline complet draft → launch.",
   "author": {
     "name": "Christian Maugé",

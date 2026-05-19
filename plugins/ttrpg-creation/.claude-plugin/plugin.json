@@ -1,6 +1,6 @@
 {
   "name": "ttrpg-creation",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud, monstres, objets magiques, encounters table-ready (combat / social / exploration / chase / downtime), donjons (5-room → full sites Jaquayed) et sorts custom (Cantrip → 9e niveau, 8 écoles). D&D 5e (2024) par défaut, plusieurs skills system-agnostic.",
   "author": {
     "name": "Christian Maugé",

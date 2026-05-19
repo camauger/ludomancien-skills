@@ -95,6 +95,7 @@ ludomancien-skills/
 ├── plugins/
 │   ├── ttrpg-creation/
 │   │   ├── .claude-plugin/plugin.json
+│   │   ├── README.md
 │   │   └── skills/
 │   │       ├── npc-creator/
 │   │       │   ├── SKILL.md
@@ -102,6 +103,7 @@ ludomancien-skills/
 │   │       └── ...
 │   ├── ttrpg-editorial/
 │   │   ├── .claude-plugin/plugin.json
+│   │   ├── README.md
 │   │   ├── skills/               # skills atomiques
 │   │   └── agents/               # agents orchestrateurs
 │   │       └── ttrpg-publication-director.md
@@ -110,9 +112,15 @@ ludomancien-skills/
 │   └── jdr-fr/
 ├── scripts/
 │   └── validate.py               # valide manifestes, SKILL.md, agents/
+├── examples/                     # galerie curatée d'outputs
+│   ├── README.md
+│   └── TEMPLATE.md
 ├── CHANGELOG.md
+├── CONTRIBUTING.md
 └── README.md
 ```
+
+Chaque plugin a son propre `README.md` qui détaille ses skills et leur workflow type. `CONTRIBUTING.md` couvre les conventions de SKILL.md, d'agents, de versioning et de validation.
 
 ## Validation locale
 
@@ -133,6 +141,10 @@ Le script vérifie que :
 ## Versioning
 
 Le marketplace suit un versioning par plugin (chacun a son propre `version` dans `plugin.json`). Quand un plugin change de manière non-rétrocompatible, bump le `MAJOR`. Quand un skill est ajouté ou enrichi, bump le `MINOR`. Pour des corrections, bump le `PATCH`.
+
+## Exemples
+
+Le dossier `examples/` contient une galerie curatée d'outputs réels produits par les skills et agents, sélectionnés parce qu'ils représentent bien ce que ces outils peuvent produire. Voir `examples/README.md` pour le mécanisme de curation et `examples/TEMPLATE.md` pour ajouter un nouvel exemple.
 
 ## Hors-scope
 
