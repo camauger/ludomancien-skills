@@ -5,16 +5,16 @@
     "url": "https://github.com/camauger"
   },
   "metadata": {
-    "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, monstres, objets magiques, encounters, tables aléatoires, audit éditorial, playtest, mise en marché, et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
-    "version": "0.6.0"
+    "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, monstres, objets magiques, sorts custom, donjons, encounters, tables aléatoires, audit éditorial, playtest, mise en marché, et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
+    "version": "0.7.0"
   },
   "plugins": [
     {
       "name": "ttrpg-creation",
       "source": "./plugins/ttrpg-creation",
-      "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud, monstres, objets magiques, encounters table-ready (combat / social / exploration / chase / downtime).",
+      "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud, monstres, objets magiques, encounters table-ready (combat / social / exploration / chase / downtime), donjons (5-room → full sites Jaquayed) et sorts custom (Cantrip → 9e niveau, 8 écoles).",
       "category": "ttrpg",
-      "tags": ["dnd", "5e", "scenario", "npc", "worldbuilding", "gm-tools", "monster", "bestiary", "magic-item", "treasure", "encounter", "combat"]
+      "tags": ["dnd", "5e", "scenario", "npc", "worldbuilding", "gm-tools", "monster", "bestiary", "magic-item", "treasure", "encounter", "combat", "dungeon", "spell"]
     },
     {
       "name": "ttrpg-editorial",

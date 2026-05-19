@@ -2,7 +2,7 @@
 
 Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table.
 
-Cinq plugins, vingt-trois skills — couvrant la création (PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters), l'audit éditorial, le playtest, la mise en marché, les tables aléatoires, la préparation print, et le contenu francophone.
+Cinq plugins, vingt-cinq skills — couvrant la création (PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters, donjons, sorts custom), l'audit éditorial, le playtest, la mise en marché, les tables aléatoires, la préparation print, et le contenu francophone.
 
 D&D 5e (2024) par défaut quand des règles sont impliquées, mais la majorité des skills est *system-agnostic* et adaptable à PF2e, OSR ou des systèmes narratifs.
 
@@ -41,6 +41,8 @@ Une fois installés, les skills se déclenchent automatiquement quand tu décris
 | `monster-creator` | Monstres complets D&D 5e 2024 (stat block + lair actions + écologie + tactiques GM + plot hooks) — à l'unité, format Monster Manual |
 | `magic-item-creator` | Objets magiques custom D&D 5e 2024 — 8 catégories standards (Armor/Weapons/Potions/Rings/Rods/Scrolls/Staves/Wands/Wondrous), 5 raretés (Common→Legendary), format DMG complet (stat + lore + variants + plot hooks) |
 | `encounter-builder` | Encounters table-ready D&D 5e 2024 — 5 types (combat, social, exploration, chase, downtime), calibrage par party (XP budget, DCs, lead distance), terrain + objectifs alternatifs + livrables table (read-aloud + GM cheat sheet) |
+| `dungeon-creator` | Donjons complets D&D 5e 2024 — 3 échelles (5-room / small 10-15 / full 16-25), 5 patterns de layout (linéaire / branching / loop / hub-and-spoke / Jaquayed), 10 fonctions de salles, occupation factionnelle dynamique, pièges + hazards + theme through-line, ASCII map + room key + GM flow notes |
+| `spell-creator` | Sorts custom D&D 5e 2024 — tous niveaux (Cantrip → 9e), 8 écoles, toutes classes PHB 2024, format PHB officiel (niveau / école / temps d'incantation / portée / composantes / durée / classes + description + scaling + lore + plot hooks). Discipline Concentration, save vs attack roll, scaling cantrip et upcast |
 
 ### `ttrpg-editorial` — Audit éditorial, playtest et mise en marché
 

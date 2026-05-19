@@ -2,6 +2,24 @@
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet adhère au [versioning sémantique](https://semver.org/lang/fr/) par plugin.
 
+## [0.7.0] — 2026-05-19
+
+### Ajouts
+
+- Plugin `ttrpg-creation` (v0.5.0) : deux nouvelles skills qui ferment l'asymétrie identifiée dans l'audit du marketplace.
+  - `dungeon-creator` — création de donjons complets pour D&D 5e 2024, à l'unité, à trois échelles (5-room ~3h / small 10–15 rooms / full 16–25 rooms). Workflow en six étapes (Concept → Layout pattern → Room key → Encounter mix & faction → Pièges/trésor/secrets → Theme & GM deliverables). Cinq patterns de layout (linéaire, branching, loop, hub-and-spoke, Jaquayed avec couches verticales). Dix fonctions de salles standardisées (entrée, combat, énigme, piège, trésor, transition, social, repos, lair, rituel) avec mix ratios par échelle. Inclut cinq fichiers `references/` : `dungeon-structures.md` (patterns, 5-Room Dungeon model, layering vertical, typologie des portes/passages, conventions de carte), `room-types-and-functions-2024.md` (10 fonctions × sous-types + pitfalls + vocabulaire FR), `encounter-mix-and-pillars.md` (three-pillar framework, pacing curves, chaînes d'encounters, faction response matrix, anti-patterns), `trap-and-hazard-library.md` (4 catégories de pièges, DCs par tier, telegraphing, triade disable/bypass/suffer, catalogue de hazards, anti-patterns), `dungeon-themes-and-dressing.md` (8 thèmes archétypaux : drowned vault, necrotic crypt, fey-twisted hollow, industrial ruin, bureaucratic afterlife, living wood, infested machine, ash-and-slag forge ; sensory layering, iconography recurrence, lore seed distribution).
+  - `spell-creator` — création de sorts custom pour D&D 5e 2024, à l'unité, au format PHB 2024. Couvre tous les niveaux (Cantrip → 9e), les 8 écoles, toutes les classes PHB 2024 (Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard, Artificer reprint). Workflow en six étapes (Concept → Niveau/École/Classes → Casting frame → Effet → Scaling → Assignation classe/lore/hooks). Frontière explicite avec `magic-item-creator` (effets chargés d'objets), `monster-creator` (innate spellcasting), et futures skills (class features, epic / 10e+ niveau). Inclut cinq fichiers `references/` : `spell-levels-and-tiers-2024.md` (économie de slots par niveau de personnage, benchmarks damage/condition/utility par niveau, choix du bon niveau, anti-patterns par tier), `schools-and-tradition-2024.md` (8 écoles détaillées avec conventions thématiques, mécaniques, signatures, pitfalls, anti-patterns + arbre de décision pour choisir l'école + vocabulaire FR), `casting-time-and-components-2024.md` (Action/Bonus Action/Reaction/long, syntaxe des triggers de Reaction, components V/S/M et règles de costly material, ritual rules, Concentration discipline avec anti-patterns), `spell-effect-library.md` (formes d'AoE et tailles par niveau, save vs attack rules, patterns de damage / condition / buff / debuff / summon 2024 / utility / divination / battlefield-shape), `balance-and-anti-patterns.md` (benchmarks damage par niveau, scaling math, cadence de save, discipline Concentration, catalogue d'anti-patterns : universal-anti-everything, must-have-or-die, ceiling-buster, ritual loophole, action-economy abuse, save-or-die sans staging, etc.).
+
+### Modifications
+
+- `ttrpg-creation` : description et tags étendus pour refléter les dimensions donjon et sort (`dungeon`, `spell` ajoutés aux tags). Le plugin couvre maintenant 11 skills (9 → 11), restant le plugin le plus dense du marketplace.
+- `marketplace.json` : version bumpée à 0.7.0, description étendue aux donjons et aux sorts custom.
+- `README.md` : décompte mis à jour (23 → 25 skills), deux nouvelles lignes ajoutées au tableau `ttrpg-creation`.
+
+### Fermeture de la symétrie de création
+
+Cette release ferme deux asymétries identifiées dans l'audit du marketplace : `settlement-toolkit-creator` couvrait les habitations sans `dungeon-creator` pour les sites de confrontation, et `magic-item-creator` couvrait le matériel sans `spell-creator` pour les options de caster. Le plugin `ttrpg-creation` couvre maintenant symétriquement personnages (PNJ / backgrounds), organisations (factions), lieux (settlements / dungeons), créatures (monstres), équipement (magic items), magie (sorts), scènes (encounters / read-aloud) et chaînes (scénarios).
+
 ## [0.6.0] — 2026-05-18
 
 ### Ajouts
