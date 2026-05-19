@@ -6,7 +6,9 @@ Vérifie que :
   - chaque plugin.json parse et déclare les champs requis
   - chaque SKILL.md a un frontmatter YAML valide avec name + description
   - chaque skill listé sur disque appartient bien à son plugin
-  - les noms dans les frontmatters correspondent aux noms de dossiers
+  - chaque agent (fichier .md dans agents/) a un frontmatter YAML valide
+    avec name + description
+  - les noms dans les frontmatters correspondent aux noms de fichiers/dossiers
 
 Usage:
     python scripts/validate.py
@@ -29,6 +31,7 @@ PLUGINS_DIR = ROOT / "plugins"
 REQUIRED_MARKETPLACE_FIELDS = {"name", "owner", "plugins"}
 REQUIRED_PLUGIN_FIELDS = {"name", "version", "description"}
 REQUIRED_SKILL_FRONTMATTER = {"name", "description"}
+REQUIRED_AGENT_FRONTMATTER = {"name", "description"}
 
 
 @dataclass
@@ -161,6 +164,41 @@ def validate_skill(skill_dir: Path, report: Report) -> None:
         )
 
 
+def validate_agent(agent_file: Path, report: Report) -> None:
+    """Valide un fichier d'agent (markdown avec frontmatter YAML).
+
+    Les agents sont des fichiers .md plats dans <plugin>/agents/, pas
+    des dossiers. Le nom de l'agent (frontmatter `name`) doit
+    correspondre au nom du fichier sans l'extension.
+    """
+    rel = agent_file.relative_to(ROOT)
+    if agent_file.suffix != ".md":
+        report.warn(f"{rel}: agent file is not markdown")
+        return
+    text = agent_file.read_text(encoding="utf-8")
+    fm = parse_yaml_frontmatter(text)
+    if fm is None:
+        report.err(f"{rel}: no valid YAML frontmatter")
+        return
+    missing = REQUIRED_AGENT_FRONTMATTER - fm.keys()
+    if missing:
+        report.err(f"{rel} frontmatter missing: {sorted(missing)}")
+        return
+    expected_name = agent_file.stem
+    if fm["name"] != expected_name:
+        report.err(
+            f"{rel}: frontmatter name '{fm['name']}' "
+            f"doesn't match file name '{expected_name}'"
+        )
+    if len(fm.get("description", "")) < 30:
+        report.warn(f"{rel}: description suspiciously short")
+    if len(fm.get("description", "")) > 1536:
+        report.warn(
+            f"{rel}: description >1536 chars, "
+            f"will be truncated by Claude Code"
+        )
+
+
 def main() -> int:
     report = Report()
     marketplace = validate_marketplace(report)
@@ -185,10 +223,15 @@ def main() -> int:
         skills_root = plugin_dir / "skills"
         if not skills_root.exists():
             report.warn(f"{plugin_dir.relative_to(ROOT)}: no skills/ folder")
-            continue
-        for skill_dir in sorted(skills_root.iterdir()):
-            if skill_dir.is_dir():
-                validate_skill(skill_dir, report)
+        else:
+            for skill_dir in sorted(skills_root.iterdir()):
+                if skill_dir.is_dir():
+                    validate_skill(skill_dir, report)
+        agents_root = plugin_dir / "agents"
+        if agents_root.exists():
+            for agent_file in sorted(agents_root.iterdir()):
+                if agent_file.is_file():
+                    validate_agent(agent_file, report)
 
     _print_report(report)
     return 0 if report.ok else 1

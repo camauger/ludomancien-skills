@@ -2,7 +2,7 @@
 
 Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table.
 
-Cinq plugins, vingt-sept skills — couvrant la création (PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters, donjons, sorts custom), l'audit éditorial (revue, playtest, mise en marché, conversion entre systèmes, validation de stat blocks), les tables aléatoires, la préparation print, et le contenu francophone.
+Cinq plugins, vingt-sept skills et un premier agent orchestrateur — couvrant la création (PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters, donjons, sorts custom), l'audit éditorial (revue, playtest, mise en marché, conversion entre systèmes, validation de stat blocks), l'orchestration de pipeline (`ttrpg-publication-director` pilote draft → launch), les tables aléatoires, la préparation print, et le contenu francophone.
 
 D&D 5e (2024) par défaut quand des règles sont impliquées, mais la majorité des skills est *system-agnostic* et adaptable à PF2e, OSR ou des systèmes narratifs.
 
@@ -57,6 +57,12 @@ Une fois installés, les skills se déclenchent automatiquement quand tu décris
 | `adventure-converter` | Conversion d'aventures et suppléments JDR entre systèmes : 5e 2014 → 5e 2024, 5e → PF2e, 5e → OSR (B/X, OSE, Shadowdark), 5e → narratif (PbtA/FitD notes). Audit source + matrice de conversion + livrable converti + notes GM |
 | `stat-block-validator` | Audit mécanique de stat blocks D&D 5e 2024 (format MM 2024, arithmétique, math CR offensive/défensive, action economy, vocabulaire 2024). Rapport de défauts avec sévérité et correctifs proposés. Pure validation, non-éditorial |
 
+**Agents :**
+
+| Agent | Rôle |
+|---|---|
+| `ttrpg-publication-director` | Orchestrateur full-pipeline draft → launch en 7 stages (Cliché → Mécanique → Style → Playtest → Éditorial → Conversion → Marché). Triage les skills à invoquer selon le type de produit et l'intent commercial, synthétise les findings cross-stage, produit un rapport unifié avec verdict de launch (Launch-Ready / Launch-Ready with Caveats / Conditional / Major Revision Required) et plan d'action priorisé |
+
 ### `ttrpg-tables` — Tables aléatoires
 
 | Skill | Rôle |
@@ -95,11 +101,15 @@ ludomancien-skills/
 │   │       │   └── references/
 │   │       └── ...
 │   ├── ttrpg-editorial/
+│   │   ├── .claude-plugin/plugin.json
+│   │   ├── skills/               # skills atomiques
+│   │   └── agents/               # agents orchestrateurs
+│   │       └── ttrpg-publication-director.md
 │   ├── ttrpg-tables/
 │   ├── ttrpg-print/
 │   └── jdr-fr/
 ├── scripts/
-│   └── validate.py               # validation des manifestes et frontmatters
+│   └── validate.py               # valide manifestes, SKILL.md, agents/
 ├── CHANGELOG.md
 └── README.md
 ```
@@ -117,6 +127,7 @@ Le script vérifie que :
 - `marketplace.json` parse et a les champs requis
 - chaque `plugin.json` parse et a les champs requis
 - chaque `SKILL.md` a un frontmatter YAML valide avec `name` et `description`
+- chaque fichier d'agent (`<plugin>/agents/<nom>.md`) a un frontmatter YAML valide avec `name` et `description`, et le `name` correspond au nom de fichier
 - chaque skill listé dans un plugin existe physiquement sur le disque
 
 ## Versioning

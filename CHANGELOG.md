@@ -2,6 +2,24 @@
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet adhère au [versioning sémantique](https://semver.org/lang/fr/) par plugin.
 
+## [0.9.0] — 2026-05-19
+
+### Ajouts
+
+- Plugin `ttrpg-editorial` (v0.5.0) : **premier agent orchestrateur** du marketplace.
+  - `ttrpg-publication-director` — agent (pas skill) qui pilote un produit JDR à travers le pipeline de publication complet draft → launch en sept stages : (1) Originality Audit (`ttrpg-cliche-buster`), (2) Mechanical Validation (`stat-block-validator` + flags pour sorts/items), (3) Style Audit (`editorial-tic-auditor` + `name-revision`), (4) Table Playtest (`ttrpg-playtest-orchestrator`), (5) Holistic Editorial Review (`ttrpg-supplement-reviewer`), (6) System Conversion optionnelle (`adventure-converter`), (7) Market Readiness (`digital-product-evaluator`). Triage upfront pour décider quels stages courir selon le type de produit (scénario / bestiaire / settlement / etc.), le système cible, et l'intent commercial. Synthèse cross-stage avec identification des concerns récurrents (cliché + tic + naming overlap, mechanical + playtest overlap, etc.). Output : rapport unifié avec verdict de launch (Launch-Ready / Launch-Ready with Caveats / Conditional / Major Revision Required), launch blockers, polish prioritisé, et estimation du chemin de launch. Discipline opérationnelle : halt-on-catastrophic, parallélisation des stages indépendants (2+3), skip rules par type de produit, anti-patterns documentés (verdict inflation, findings dump, mission creep). Model : `opus` (synthèse complexe). Tools : Read, Write, Edit, Glob, Grep, Bash, Skill, TaskCreate, TaskUpdate, TaskList, TaskGet. Fichier : `plugins/ttrpg-editorial/agents/ttrpg-publication-director.md`.
+
+### Modifications
+
+- `ttrpg-editorial` : description et tags étendus pour refléter l'arrivée du premier agent (`agent`, `orchestration` ajoutés aux tags). Le plugin couvre maintenant 8 skills + 1 agent.
+- `marketplace.json` : version bumpée à 0.9.0, description étendue au premier agent orchestrateur.
+- `README.md` : décompte mis à jour (27 skills + 1 agent), nouvelle section « Agents » dans le tableau `ttrpg-editorial`, structure du repo enrichie pour montrer `agents/`, section Validation locale enrichie.
+- `scripts/validate.py` : étendu pour valider aussi les fichiers `<plugin>/agents/*.md` (frontmatter YAML, name match avec nom de fichier, longueur de description, limite 1536 chars). Le script reste sans dépendances PyYAML (parseur minimaliste maison).
+
+### Première extension de la taxonomie : skills + agents
+
+Cette release introduit la distinction skills / agents dans le marketplace. Les **skills** sont atomiques, déclenchées par phrase-clé, exécutent une tâche précise. Les **agents** sont orchestrateurs, gèrent leur propre contexte sur plusieurs étapes, invoquent des skills à la volée. Le marketplace peut maintenant héberger les deux. Futurs agents prévus : `bestiary-builder` (multi-monstres avec cohérence cross-créature), `scenario-architect` (dialogue itératif pour designer un scénario), `campaign-prep-agent` (préparation hebdomadaire de session avec mémoire cross-sessions).
+
 ## [0.8.0] — 2026-05-19
 
 ### Ajouts
