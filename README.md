@@ -2,7 +2,7 @@
 
 Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table.
 
-Cinq plugins, vingt-cinq skills — couvrant la création (PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters, donjons, sorts custom), l'audit éditorial, le playtest, la mise en marché, les tables aléatoires, la préparation print, et le contenu francophone.
+Cinq plugins, vingt-sept skills — couvrant la création (PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters, donjons, sorts custom), l'audit éditorial (revue, playtest, mise en marché, conversion entre systèmes, validation de stat blocks), les tables aléatoires, la préparation print, et le contenu francophone.
 
 D&D 5e (2024) par défaut quand des règles sont impliquées, mais la majorité des skills est *system-agnostic* et adaptable à PF2e, OSR ou des systèmes narratifs.
 
@@ -54,6 +54,8 @@ Une fois installés, les skills se déclenchent automatiquement quand tu décris
 | `editorial-tic-auditor` | Audit des tics récurrents dans la fiction long-form |
 | `ttrpg-playtest-orchestrator` | Playtest multi-passes (audit mécanique, simulation 4-5 personas, retours en voix, synthèse) — 5e 2024, OSR, PbtA, FitD |
 | `digital-product-evaluator` | Évaluation commerciale DriveThruRPG 4 axes (listing, pricing, visuels, positionnement) — modes pre-launch et post-launch |
+| `adventure-converter` | Conversion d'aventures et suppléments JDR entre systèmes : 5e 2014 → 5e 2024, 5e → PF2e, 5e → OSR (B/X, OSE, Shadowdark), 5e → narratif (PbtA/FitD notes). Audit source + matrice de conversion + livrable converti + notes GM |
+| `stat-block-validator` | Audit mécanique de stat blocks D&D 5e 2024 (format MM 2024, arithmétique, math CR offensive/défensive, action economy, vocabulaire 2024). Rapport de défauts avec sévérité et correctifs proposés. Pure validation, non-éditorial |
 
 ### `ttrpg-tables` — Tables aléatoires
 

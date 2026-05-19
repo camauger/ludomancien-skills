@@ -5,8 +5,8 @@
     "url": "https://github.com/camauger"
   },
   "metadata": {
-    "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, monstres, objets magiques, sorts custom, donjons, encounters, tables aléatoires, audit éditorial, playtest, mise en marché, et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
-    "version": "0.7.0"
+    "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, monstres, objets magiques, sorts custom, donjons, encounters, tables aléatoires, audit éditorial, playtest, mise en marché, conversion entre systèmes (5e 2014 → 2024 / PF2e / OSR), audit mécanique de stat blocks, et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
+    "version": "0.8.0"
   },
   "plugins": [
     {
@@ -19,9 +19,9 @@
     {
       "name": "ttrpg-editorial",
       "source": "./plugins/ttrpg-editorial",
-      "description": "Audit éditorial, playtest et mise en marché pour suppléments JDR : revue de publication, chasse aux clichés, tics récurrents, noms génériques, simulation de playtest multi-passes, et évaluation commerciale (listing, pricing, visuels, positionnement DriveThruRPG).",
+      "description": "Audit éditorial, playtest et mise en marché pour suppléments JDR : revue de publication, chasse aux clichés, tics récurrents, noms génériques, simulation de playtest multi-passes, évaluation commerciale (listing, pricing, visuels, positionnement DriveThruRPG), conversion entre systèmes (5e 2014 → 2024 / 5e → PF2e / 5e → OSR / 5e → narratif), et audit mécanique de stat blocks 5e 2024.",
       "category": "writing",
-      "tags": ["editorial", "review", "ttrpg", "publishing", "playtest", "drivethrurpg", "pricing"]
+      "tags": ["editorial", "review", "ttrpg", "publishing", "playtest", "drivethrurpg", "pricing", "conversion", "stat-block", "validation"]
     },
     {
       "name": "ttrpg-tables",
