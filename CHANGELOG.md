@@ -2,6 +2,23 @@
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet adhère au [versioning sémantique](https://semver.org/lang/fr/) par plugin.
 
+## [1.1.0] — 2026-05-19
+
+### Ajouts
+
+- Plugin `ttrpg-creation` (v1.1.0) : **deuxième agent du marketplace** et premier agent dans `ttrpg-creation`.
+  - `scenario-architect` — agent de design itératif pour concevoir un scénario *avant* de l'écrire. Pas un orchestrateur de skills (contrairement à `ttrpg-publication-director`) : un design partner en dialogue. Sept stages séquentiels : (1) Seed (système / party / longueur / prémisse en une phrase), (2) Tone & Genre (registre fantasy, registre tonal, références optionnelles), (3) Antagonist & Stakes (qui pousse, conséquence d'échec, tick rate du clock), (4) Pillar Mix & Set Pieces (% combat/social/exploration, 1-3 scènes obligatoires), (5) Structure Pattern (node-based / mystery / dungeon / time-pressure / heist / siege / chase / hybrid avec strengths et risks documentés), (6) Key NPCs & Locations (3-5 de chaque, notes de stat block en une ligne — pas de stat blocks complets), (7) Encounter Shortlist & Synthesis (2-4 encounters load-bearing avec chemins alternatifs). Discipline de dialogue : 2-4 questions max par stage, recap d'état entre stages, détection de tensions cross-stage (genre vs antagonist, length vs scope, party level vs encounter difficulty, pillar mix vs structure pattern, set piece vs pattern). Halt conditions documentées (mismatch fondamental, prémisse structurellement impossible, design déjà complet, scope explosion). Anti-patterns documentés (wall of questions, silent drift, writing the scenario, premature lock-in, brainstorm explosion, completeness fetish, scenario-writer mimic). Output : un *Scenario Design Brief* Markdown structuré (technical card, premise, antagonist & faction pressure, stakes & clock, structure pattern, key NPCs, key locations, encounter shortlist, design tradeoffs locked in, open questions for scenario-writer) prêt à passer directement à `scenario-writer`. Model : `opus` (synthèse de design itératif). Tools : Read, Write, Edit, Glob, Grep, Skill, TaskCreate, TaskUpdate, TaskList, TaskGet (pas de Bash — l'agent ne lance rien). Boundary stricte : l'agent *designe*, `scenario-writer` *écrit*. Fichier : `plugins/ttrpg-creation/agents/scenario-architect.md`.
+
+### Modifications
+
+- `ttrpg-creation` : description et tags étendus pour refléter l'ajout du premier agent du plugin (`agent`, `design` ajoutés aux tags). Le plugin couvre maintenant 11 skills + 1 agent. Le README du plugin gagne une section *Agents* et une section *Quand utiliser quoi* pour clarifier le workflow `scenario-architect` → `scenario-writer`.
+- `marketplace.json` : version bumpée à 1.1.0, description étendue au deuxième agent. Le marketplace compte maintenant 27 skills + 2 agents.
+- `README.md` : décompte mis à jour (27 skills + 2 agents), nouvelle section *Agents* dans le tableau `ttrpg-creation`, structure du repo enrichie pour montrer `agents/` aussi dans `ttrpg-creation`.
+
+### Pourquoi un agent de design (pas juste un skill enrichi)
+
+`scenario-writer` produit une aventure complète en one-shot quand on lui donne un brief clair. Beaucoup de cas réels partent d'une idée vague (« heist dans une cité d'horlogerie », « one-shot Halloween avec un démon de paralysie du sommeil ») où le design n'est pas encore lock. `scenario-architect` couvre cet upstream : il extrait les paramètres critiques par dialogue, surface les tradeoffs aux moments de décision, détecte les incohérences cross-stage (le piège classique « cozy fantasy + meurtre d'enfant » qui passe inaperçu en one-shot), et produit un brief qui rend `scenario-writer` plus efficace en aval. C'est un design partner, pas un orchestrateur — il n'invoque pas d'autres skills, sa valeur est dans la qualité du dialogue et de la synthèse.
+
 ## [1.0.0] — 2026-05-19
 
 Première release stable. Le marketplace couvre 27 skills et 1 agent orchestrateur répartis sur 5 plugins, avec une documentation complète (top-level README, per-plugin READMEs, CONTRIBUTING.md, galerie d'exemples curatée).

@@ -2,7 +2,7 @@
 
 Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table.
 
-Cinq plugins, vingt-sept skills et un premier agent orchestrateur — couvrant la création (PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters, donjons, sorts custom), l'audit éditorial (revue, playtest, mise en marché, conversion entre systèmes, validation de stat blocks), l'orchestration de pipeline (`ttrpg-publication-director` pilote draft → launch), les tables aléatoires, la préparation print, et le contenu francophone.
+Cinq plugins, vingt-sept skills et deux agents — couvrant la création (PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters, donjons, sorts custom), l'audit éditorial (revue, playtest, mise en marché, conversion entre systèmes, validation de stat blocks), l'orchestration de pipeline (`ttrpg-publication-director` pilote draft → launch), la conception itérative de scénarios (`scenario-architect` designe avant que `scenario-writer` n'écrive), les tables aléatoires, la préparation print, et le contenu francophone.
 
 D&D 5e (2024) par défaut quand des règles sont impliquées, mais la majorité des skills est *system-agnostic* et adaptable à PF2e, OSR ou des systèmes narratifs.
 
@@ -43,6 +43,12 @@ Une fois installés, les skills se déclenchent automatiquement quand tu décris
 | `encounter-builder` | Encounters table-ready D&D 5e 2024 — 5 types (combat, social, exploration, chase, downtime), calibrage par party (XP budget, DCs, lead distance), terrain + objectifs alternatifs + livrables table (read-aloud + GM cheat sheet) |
 | `dungeon-creator` | Donjons complets D&D 5e 2024 — 3 échelles (5-room / small 10-15 / full 16-25), 5 patterns de layout (linéaire / branching / loop / hub-and-spoke / Jaquayed), 10 fonctions de salles, occupation factionnelle dynamique, pièges + hazards + theme through-line, ASCII map + room key + GM flow notes |
 | `spell-creator` | Sorts custom D&D 5e 2024 — tous niveaux (Cantrip → 9e), 8 écoles, toutes classes PHB 2024, format PHB officiel (niveau / école / temps d'incantation / portée / composantes / durée / classes + description + scaling + lore + plot hooks). Discipline Concentration, save vs attack roll, scaling cantrip et upcast |
+
+**Agents :**
+
+| Agent | Rôle |
+|---|---|
+| `scenario-architect` | Dialogue itératif pour concevoir un scénario *avant* de l'écrire. Sept stages (seed, tone & genre, antagonist & stakes, pillar mix & set pieces, structure pattern, key NPCs & locations, encounter shortlist), 2-4 questions par stage, détection de tensions cross-stage (genre vs antagonist, length vs scope, party level vs encounter). Produit un *Scenario Design Brief* Markdown prêt à passer à `scenario-writer` pour exécution |
 
 ### `ttrpg-editorial` — Audit éditorial, playtest et mise en marché
 
@@ -96,11 +102,13 @@ ludomancien-skills/
 │   ├── ttrpg-creation/
 │   │   ├── .claude-plugin/plugin.json
 │   │   ├── README.md
-│   │   └── skills/
-│   │       ├── npc-creator/
-│   │       │   ├── SKILL.md
-│   │       │   └── references/
-│   │       └── ...
+│   │   ├── skills/
+│   │   │   ├── npc-creator/
+│   │   │   │   ├── SKILL.md
+│   │   │   │   └── references/
+│   │   │   └── ...
+│   │   └── agents/
+│   │       └── scenario-architect.md
 │   ├── ttrpg-editorial/
 │   │   ├── .claude-plugin/plugin.json
 │   │   ├── README.md
