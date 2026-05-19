@@ -5,23 +5,23 @@
     "url": "https://github.com/camauger"
   },
   "metadata": {
-    "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, tables aléatoires, audit éditorial, et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
-    "version": "0.2.0"
+    "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, monstres, objets magiques, encounters, tables aléatoires, audit éditorial, playtest, mise en marché, et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
+    "version": "0.6.0"
   },
   "plugins": [
     {
       "name": "ttrpg-creation",
       "source": "./plugins/ttrpg-creation",
-      "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud.",
+      "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud, monstres, objets magiques, encounters table-ready (combat / social / exploration / chase / downtime).",
       "category": "ttrpg",
-      "tags": ["dnd", "5e", "scenario", "npc", "worldbuilding", "gm-tools"]
+      "tags": ["dnd", "5e", "scenario", "npc", "worldbuilding", "gm-tools", "monster", "bestiary", "magic-item", "treasure", "encounter", "combat"]
     },
     {
       "name": "ttrpg-editorial",
       "source": "./plugins/ttrpg-editorial",
-      "description": "Audit éditorial et playtest pour suppléments JDR : revue de publication, chasse aux clichés, tics récurrents, noms génériques, et simulation de playtest multi-passes.",
+      "description": "Audit éditorial, playtest et mise en marché pour suppléments JDR : revue de publication, chasse aux clichés, tics récurrents, noms génériques, simulation de playtest multi-passes, et évaluation commerciale (listing, pricing, visuels, positionnement DriveThruRPG).",
       "category": "writing",
-      "tags": ["editorial", "review", "ttrpg", "publishing", "playtest"]
+      "tags": ["editorial", "review", "ttrpg", "publishing", "playtest", "drivethrurpg", "pricing"]
     },
     {
       "name": "ttrpg-tables",

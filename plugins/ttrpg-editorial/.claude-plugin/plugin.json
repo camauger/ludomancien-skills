@@ -1,7 +1,7 @@
 {
   "name": "ttrpg-editorial",
-  "version": "0.2.0",
-  "description": "Audit éditorial et playtest pour suppléments JDR : revue de publication, chasse aux clichés, tics stylistiques, noms génériques, et simulation de playtest multi-passes.",
+  "version": "0.3.0",
+  "description": "Audit éditorial, playtest et mise en marché pour suppléments JDR : revue de publication, chasse aux clichés, tics stylistiques, noms génériques, simulation de playtest multi-passes, et évaluation commerciale (listing, pricing, visuels, positionnement DriveThruRPG).",
   "author": {
     "name": "Christian Maugé",
     "url": "https://github.com/camauger"

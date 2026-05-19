@@ -1,7 +1,7 @@
 {
   "name": "ttrpg-creation",
-  "version": "0.1.0",
-  "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud. D&D 5e (2024) par défaut, plusieurs skills system-agnostic.",
+  "version": "0.4.0",
+  "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud, monstres, objets magiques, encounters table-ready (combat / social / exploration / chase / downtime). D&D 5e (2024) par défaut, plusieurs skills system-agnostic.",
   "author": {
     "name": "Christian Maugé",
     "url": "https://github.com/camauger"

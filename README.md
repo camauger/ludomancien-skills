@@ -2,7 +2,7 @@
 
 Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table.
 
-Cinq plugins, dix-huit skills — couvrant la création (PNJ, factions, scénarios, settlements), l'audit éditorial, les tables aléatoires, la préparation print, et le contenu francophone.
+Cinq plugins, vingt-trois skills — couvrant la création (PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters), l'audit éditorial, le playtest, la mise en marché, les tables aléatoires, la préparation print, et le contenu francophone.
 
 D&D 5e (2024) par défaut quand des règles sont impliquées, mais la majorité des skills est *system-agnostic* et adaptable à PF2e, OSR ou des systèmes narratifs.
 
@@ -38,8 +38,11 @@ Une fois installés, les skills se déclenchent automatiquement quand tu décris
 | `settlement-toolkit-creator` | Toolkits de villages/villes (10-20 pages, lieux, PNJ, accroches, lore) |
 | `backgrounds` | Backgrounds D&D 5e 2024 au format PHB officiel |
 | `read-aloud-crafter` | Transformation de texte de jeu en narration immersive pour la table |
+| `monster-creator` | Monstres complets D&D 5e 2024 (stat block + lair actions + écologie + tactiques GM + plot hooks) — à l'unité, format Monster Manual |
+| `magic-item-creator` | Objets magiques custom D&D 5e 2024 — 8 catégories standards (Armor/Weapons/Potions/Rings/Rods/Scrolls/Staves/Wands/Wondrous), 5 raretés (Common→Legendary), format DMG complet (stat + lore + variants + plot hooks) |
+| `encounter-builder` | Encounters table-ready D&D 5e 2024 — 5 types (combat, social, exploration, chase, downtime), calibrage par party (XP budget, DCs, lead distance), terrain + objectifs alternatifs + livrables table (read-aloud + GM cheat sheet) |
 
-### `ttrpg-editorial` — Audit éditorial
+### `ttrpg-editorial` — Audit éditorial, playtest et mise en marché
 
 | Skill | Rôle |
 |---|---|
@@ -47,6 +50,8 @@ Une fois installés, les skills se déclenchent automatiquement quand tu décris
 | `ttrpg-cliche-buster` | Détection des clichés et alternatives créatives (FR/EN) |
 | `name-revision` | Remplacement des noms fantasy génériques générés par IA |
 | `editorial-tic-auditor` | Audit des tics récurrents dans la fiction long-form |
+| `ttrpg-playtest-orchestrator` | Playtest multi-passes (audit mécanique, simulation 4-5 personas, retours en voix, synthèse) — 5e 2024, OSR, PbtA, FitD |
+| `digital-product-evaluator` | Évaluation commerciale DriveThruRPG 4 axes (listing, pricing, visuels, positionnement) — modes pre-launch et post-launch |
 
 ### `ttrpg-tables` — Tables aléatoires
 
