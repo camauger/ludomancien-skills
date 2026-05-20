@@ -23,12 +23,15 @@ Création de contenu JDR : PNJ, factions, scénarios, settlements, monstres, obj
 | Agent | Rôle |
 |---|---|
 | `scenario-architect` | Dialogue itératif pour concevoir un scénario *avant* de l'écrire. Sept stages (seed, tone & genre, antagonist & stakes, pillar mix & set pieces, structure pattern, key NPCs & locations, encounter shortlist), 2-4 questions par stage, détection de tensions cross-stage. Produit un *Scenario Design Brief* Markdown prêt à passer à `scenario-writer`. À utiliser quand tu pars d'une idée vague ; à ne pas utiliser si tu as déjà un design complet (invoque `scenario-writer` directement) |
+| `bestiary-builder` | Orchestrateur de bestiaire cohérent (5-30 créatures). Designe un framework écologique (origine partagée, prédateurs-proies, niches non-redondantes, traits récurrents), planifie le roster, orchestre `monster-creator` par entrée avec le framework en contexte, audite cross-créature par batch (niche duplication, framework drift, CR distribution, encounter mix), optionnellement valide via `stat-block-validator`, assemble un bestiaire publication-ready (intro + créatures + diagramme prédateurs-proies + encounter tables). À utiliser pour un *set* de créatures ; pour un seul monstre, invoque `monster-creator` directement |
 
 ## Quand utiliser quoi
 
 - **Idée vague de scénario** → `scenario-architect` (dialogue, brief) → `scenario-writer` (prose)
-- **Design déjà clair** → `scenario-writer` directement
-- **Création d'éléments isolés** (PNJ, monstre, sort, donjon) → skill atomique correspondant
+- **Design de scénario déjà clair** → `scenario-writer` directement
+- **Un seul monstre** → `monster-creator` directement
+- **Set cohérent de 5-30 créatures** → `bestiary-builder` (orchestrateur)
+- **Création d'éléments isolés** (PNJ, sort, donjon, objet magique) → skill atomique correspondant
 
 ## Installation
 

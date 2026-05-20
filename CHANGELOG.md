@@ -2,6 +2,33 @@
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet adhère au [versioning sémantique](https://semver.org/lang/fr/) par plugin.
 
+## [1.2.0] — 2026-05-19
+
+### Ajouts
+
+- Plugin `ttrpg-creation` (v1.2.0) : **troisième agent du marketplace** et premier orchestrateur de génération de set.
+  - `bestiary-builder` — agent qui produit un bestiaire cohérent de 5-30 créatures (pas un monstre à la fois ; un *set* avec ecology partagée, prédateurs-proies, niches non-redondantes, traits récurrents). Pattern : orchestrateur de génération (contrairement à `scenario-architect` qui est un design partner dialogué, et `ttrpg-publication-director` qui est un orchestrateur d'audit). Huit stages séquentiels : (1) Triage & brief (theme / count / CR range / system / intent, plus anchor creatures et exclusions optionnels), (2) Coherence Framework (shared origin / predator-prey structure / niche assignments / recurring trait keywords / tone keywords / anti-theme — ce qui n'appartient pas), (3) Roster Planning (table pré-génération validée par l'utilisateur avant token-expensive generation), (4) Generation Loop (invocation `monster-creator` par entrée avec framework + roster slot + voisins déjà générés en contexte, génération en batchs de 3-5 avec audit entre batchs), (5) Cross-Creature Audit (niche duplication, framework drift, CR distribution, trait conflict, anti-theme violation, encounter mix feasibility, voice consistency), (6) Mechanical Validation optionnelle (`stat-block-validator` par créature, halt-on-catastrophic si >2 errors critiques), (7) Polish & Resolution (renommage, voice fix, trait keyword recovery, niche fix, mechanical fix), (8) Final Assembly (intro + diagramme prédateurs-proies ASCII/Mermaid + creature entries + encounter tables tiered + appendix). Discipline tokens : estimation prealable, batchs avec checkpoints, warning utilisateur avant grand set. Halt conditions documentées : CR range trop large (1/8 → 25 dans un même bestiaire), theme self-contradictory, count irréaliste (>30 = split en volumes), erreurs critiques en cascade (>2 = framework problem). Anti-patterns documentés : the 20-creature dump, the CR clustering, the niche collision, the framework dilution, the encounter unfeasibility, the kitchen sink, the framework smuggle (générer sans passer le framework à `monster-creator`), the single-pass audit, the publication-director mimic. Model : `opus` (orchestration multi-skill + raisonnement cross-créature). Tools : Read, Write, Edit, Glob, Grep, Bash, Skill, TaskCreate, TaskUpdate, TaskList, TaskGet. Fichier : `plugins/ttrpg-creation/agents/bestiary-builder.md`.
+
+### Modifications
+
+- `ttrpg-creation` : description et tags étendus (`orchestration` ajouté). Le plugin couvre maintenant 11 skills + 2 agents.
+- `marketplace.json` : version bumpée à 1.2.0, description étendue au troisième agent. Le marketplace compte maintenant 27 skills + 3 agents.
+- `README.md` : décompte mis à jour (27 skills + 3 agents), `bestiary-builder` ajouté au tableau *Agents* du plugin `ttrpg-creation`, structure du repo enrichie pour montrer les deux fichiers d'agent.
+- `plugins/ttrpg-creation/README.md` : nouvelle entrée *Agents* + section *Quand utiliser quoi* enrichie pour distinguer `monster-creator` (un monstre) de `bestiary-builder` (set cohérent).
+
+### Pourquoi un orchestrateur (pas juste un loop de monster-creator)
+
+Générer 20 monstres avec 20 appels indépendants de `monster-creator` produit 20 stat blocks valides mais qui ne forment pas un *bestiaire* — pas d'écologie partagée, niches qui se dupliquent, traits récurrents absents, encounter table impossible à construire. `bestiary-builder` orchestre la même skill mais *en passant un framework partagé et les voisins déjà générés* à chaque appel, puis audite cross-créature pour rattraper les drifts. La valeur n'est pas dans la génération individuelle ; elle est dans le framework + l'audit + l'assembly. C'est aussi pour ça que l'agent fait du chunking explicite (batchs de 3-5 avec audit entre) — la cohérence se perd quand on génère 20 stat blocks d'affilée sans check.
+
+### Trois agents, trois patterns distincts
+
+Le marketplace contient maintenant trois agents avec trois patterns distincts :
+- `ttrpg-publication-director` (ttrpg-editorial) — **orchestrateur d'audit**. Prend un manuscrit existant, le passe à travers les skills d'audit, synthétise un verdict.
+- `scenario-architect` (ttrpg-creation) — **design partner dialogué**. Pas d'orchestration ; pure conversation sur 7 stages pour produire un brief.
+- `bestiary-builder` (ttrpg-creation) — **orchestrateur de génération**. Génère un set cohérent en appelant `monster-creator` avec framework partagé, audit cross-batch.
+
+Cette diversité de patterns est intentionnelle : les agents ne sont pas tous le même type de chose. Futurs agents pressentis : `campaign-prep-agent` (préparation hebdomadaire de session avec mémoire cross-sessions — pattern *mémoire persistante*, encore non explorée).
+
 ## [1.1.0] — 2026-05-19
 
 ### Ajouts
