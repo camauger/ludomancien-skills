@@ -6,5 +6,34 @@
       "Read(//c/Users/camauger/.claude/plugins/**)",
       "Read(//c/Users/camauger/.claude/**)"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python scripts/hook-precommit-validate.py",
+            "if": "Bash(git commit*)",
+            "timeout": 30,
+            "statusMessage": "Validation marketplace avant commit..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python scripts/hook-postedit-validate.py",
+            "timeout": 30,
+            "statusMessage": "Validation SKILL.md / agent..."
+          }
+        ]
+      }
+    ]
   }
 }
