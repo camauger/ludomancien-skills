@@ -5,16 +5,16 @@
     "url": "https://github.com/camauger"
   },
   "metadata": {
-    "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, monstres, objets magiques, sorts custom, donjons, encounters, tables aléatoires, audit éditorial, playtest, mise en marché, conversion entre systèmes (5e 2014 → 2024 / PF2e / OSR), audit mécanique de stat blocks, trois agents (ttrpg-publication-director pour le pipeline draft → launch ; scenario-architect pour concevoir un scénario via dialogue itératif ; bestiary-builder pour générer un bestiaire cohérent de 5-30 créatures avec framework écologique), et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
-    "version": "1.2.0"
+    "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, monstres, objets magiques, sorts custom, dons custom (feats 2024), donjons, encounters, tables aléatoires, audit éditorial, playtest, mise en marché, conversion entre systèmes (5e 2014 → 2024 / PF2e / OSR), audit mécanique de stat blocks, trois agents (ttrpg-publication-director pour le pipeline draft → launch ; scenario-architect pour concevoir un scénario via dialogue itératif ; bestiary-builder pour générer un bestiaire cohérent de 5-30 créatures avec framework écologique), et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
+    "version": "1.3.0"
   },
   "plugins": [
     {
       "name": "ttrpg-creation",
       "source": "./plugins/ttrpg-creation",
-      "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud, monstres, objets magiques, encounters table-ready (combat / social / exploration / chase / downtime), donjons (5-room → full sites Jaquayed), sorts custom (Cantrip → 9e niveau, 8 écoles), plus deux agents : scenario-architect (dialogue itératif pour concevoir un scénario avant écriture) et bestiary-builder (orchestrateur bestiaire cohérent 5-30 créatures).",
+      "description": "Création de contenu JDR : PNJ, factions, scénarios, settlements, backgrounds, read-aloud, monstres, objets magiques, encounters table-ready (combat / social / exploration / chase / downtime), donjons (5-room → full sites Jaquayed), sorts custom (Cantrip → 9e niveau, 8 écoles), dons custom (feats 2024 : Origin / General / Fighting Style / Epic Boon), plus deux agents : scenario-architect (dialogue itératif pour concevoir un scénario avant écriture) et bestiary-builder (orchestrateur bestiaire cohérent 5-30 créatures).",
       "category": "ttrpg",
-      "tags": ["dnd", "5e", "scenario", "npc", "worldbuilding", "gm-tools", "monster", "bestiary", "magic-item", "treasure", "encounter", "combat", "dungeon", "spell", "agent", "design", "orchestration"]
+      "tags": ["dnd", "5e", "scenario", "npc", "worldbuilding", "gm-tools", "monster", "bestiary", "magic-item", "treasure", "encounter", "combat", "dungeon", "spell", "feat", "agent", "design", "orchestration"]
     },
     {
       "name": "ttrpg-editorial",
