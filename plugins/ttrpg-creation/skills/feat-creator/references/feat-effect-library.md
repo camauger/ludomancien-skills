@@ -15,6 +15,7 @@ is unreadable. One new thing, anchored by familiar ones.
 | **Per Short or Long Rest** | 2–3× per day — encounter-sized | (common on class features; rare on feats — use sparingly) |
 | **PB per Long Rest** | Scales 2 → 6 across the game — the 2024 default for countable resources | Lucky's Luck Points, Musician's Inspiration |
 | **Recharge on Initiative** | Once per combat, flavor of readiness | Boon of Fate |
+| **Consumable-gated** | Limited by an item's uses (Healer's Kit) or the target's own resources (Hit Point Dice) — self-balancing through cost | Healer's Battle Medic |
 
 Pick the pattern by asking *how often should the table see this?* —
 then never combine two resource patterns in one feat.

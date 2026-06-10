@@ -85,8 +85,8 @@ Five things to settle before designing:
 
 3. **Prerequisites.** Only for General feats (level, ability score 13+,
    class feature, or training) and the fixed gates of Fighting Style /
-   Epic Boon. A prerequisite must gate something real — see the
-   anti-patterns reference.
+   Epic Boon. A prerequisite must gate something real — see
+   `references/balance-and-anti-patterns.md`.
 
 4. **Power budget.** Which 2–3 official feats occupy the nearest niche?
    If you cannot name them, the category is probably wrong. Load
@@ -98,7 +98,9 @@ Five things to settle before designing:
    hook is usually in the *trigger condition*, the *secondary effect*,
    or the *narrative texture* — not in bigger numbers.
 
-If any of these is unclear, ask before designing.
+If any of these is unclear, ask before designing. In non-interactive
+contexts (batch generation, orchestrated calls), state your assumptions
+explicitly in the deliverable and proceed.
 
 ---
 
@@ -132,7 +134,8 @@ PHB-style entry.
 
 ### Step 3 — Mechanical Design
 
-- **2–3 benefits maximum, exactly one signature.** The signature is the
+- **2–3 named benefits maximum — not counting the Ability Score
+  Increase — and exactly one signature.** The signature is the
   benefit the player will tell stories about; the others are support.
   All benefits serve the Step 1 identity sentence — a grab bag is a
   design failure.
@@ -217,7 +220,10 @@ Deliver each feat as:
 ---
 
 **Design Notes** *(GM-facing)*
-- **Calibration:** [one-line verdict naming the 2–3 reference feats]
+- **Calibration:** [one-line verdict naming the 2–3 reference feats;
+  add the benefit-by-benefit comparison table only when the design is
+  contested or the feat sits near a category ceiling — otherwise the
+  table stays internal]
 - **Watch for:** [any table-level interaction worth flagging, or "nothing unusual"]
 
 **Origin.** [lore paragraph + notable practitioner]

@@ -138,7 +138,7 @@ safe — and say which choice must differ, exactly as Magic Initiate does.
 - [ ] General/Epic: ASI present, +1 only, correct cap (20 / 30); Origin/Fighting Style: no ASI
 - [ ] 2–3 benefits max, exactly one signature, all serving one identity
 - [ ] No flat always-on combat numbers outside Fighting Style
-- [ ] Every resource uses a 2024 pattern (once/turn, 1/LR, PB/LR, recharge)
+- [ ] Every resource uses a 2024 pattern (once/turn, 1/LR, PB/LR, recharge, consumable-gated)
 - [ ] Calibration table cites 2–3 named official feats + one-line verdict
 - [ ] Stacking audit run against the niche's official feats
 - [ ] Prerequisite (if any) gates something real
