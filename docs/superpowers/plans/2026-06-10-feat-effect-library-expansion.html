@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan — enrichissement feat-effect-library (ttrpg-creation 1.4.0)</title>
+<style>
+  :root { --accent:#475569; --accent-dark:#334155; --soft:#eef1f5; --border:#d7dde5; --text:#1e293b; --muted:#64748b; --code-bg:#f1f5f9; --done:#94a3b8; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; color:var(--text); background:#fff; line-height:1.6; }
+  h1,h2,h3 { font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; color:var(--accent-dark); line-height:1.25; }
+  h1 { font-size:1.6rem; margin:.2rem 0 .4rem; }
+  h2 { font-size:1.15rem; margin:0; display:inline; }
+  code { background:var(--code-bg); padding:.1em .35em; border-radius:4px; font-size:.9em; font-family:ui-monospace,"Cascadia Code",Consolas,monospace; }
+  pre { background:var(--code-bg); border:1px solid var(--border); border-radius:6px; padding:.8rem 1rem; overflow-x:auto; font-size:.82rem; line-height:1.45; }
+  pre code { background:none; padding:0; }
+  .layout { display:grid; grid-template-columns:250px 1fr; min-height:100vh; }
+  nav.toc { position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto; background:var(--soft); border-right:1px solid var(--border); padding:1.2rem 1rem; font-size:.87rem; }
+  nav.toc h2 { display:block; font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:.6rem; }
+  nav.toc ul { list-style:none; margin:0; padding:0; }
+  nav.toc li { margin:.15rem 0; }
+  nav.toc a { display:block; padding:.25rem .5rem; border-radius:5px; text-decoration:none; color:var(--text); }
+  nav.toc a:hover { background:#e2e8f0; }
+  nav.toc a.active { background:var(--accent); color:#fff; }
+  main { padding:1.5rem 2.5rem 4rem; min-width:0; }
+  .meta { color:var(--muted); font-size:.9rem; margin-bottom:1rem; }
+  .meta strong { color:var(--text); }
+  .progress-wrap { position:sticky; top:0; background:#fff; padding:.7rem 0 .6rem; z-index:10; border-bottom:1px solid var(--border); margin-bottom:1.2rem; }
+  .progress-label { font-size:.82rem; color:var(--muted); margin-bottom:.3rem; }
+  .progress-bar { height:8px; background:var(--soft); border-radius:4px; overflow:hidden; }
+  .progress-fill { height:100%; width:0; background:var(--accent); border-radius:4px; transition:width .25s ease; }
+  .controls { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.2rem; }
+  .controls button { font:inherit; font-size:.82rem; padding:.35rem .8rem; border:1px solid var(--border); border-radius:6px; background:#fff; color:var(--accent-dark); cursor:pointer; }
+  .controls button:hover { background:var(--soft); }
+  details.section { border:1px solid var(--border); border-radius:8px; margin-bottom:.8rem; background:#fff; }
+  details.section > summary { cursor:pointer; padding:.75rem 1rem; list-style:none; display:flex; align-items:center; gap:.6rem; user-select:none; }
+  details.section > summary::-webkit-details-marker { display:none; }
+  details.section > summary::before { content:"›"; font-size:1.2rem; color:var(--muted); transition:transform .15s ease; flex-shrink:0; }
+  details.section[open] > summary::before { transform:rotate(90deg); }
+  details.section > summary:hover { background:var(--soft); }
+  details.section > .body { padding:.2rem 1.2rem 1rem 2.4rem; border-top:1px solid var(--border); }
+  .badge { margin-left:auto; font-size:.75rem; background:var(--soft); color:var(--accent-dark); padding:.1rem .55rem; border-radius:999px; white-space:nowrap; }
+  .badge.full { background:var(--accent); color:#fff; }
+  ul.checklist { list-style:none; padding-left:.2rem; }
+  ul.checklist li { margin:.4rem 0; display:flex; align-items:flex-start; gap:.55rem; }
+  ul.checklist input[type=checkbox] { margin-top:.3rem; width:16px; height:16px; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
+  ul.checklist label { cursor:pointer; }
+  ul.checklist li.done > label { text-decoration:line-through; color:var(--done); }
+  .files { font-size:.85rem; color:var(--muted); background:var(--soft); border-radius:6px; padding:.5rem .8rem; margin:.5rem 0; }
+  @media (max-width:860px) { .layout { grid-template-columns:1fr; } nav.toc { position:static; height:auto; border-right:none; border-bottom:1px solid var(--border); } main { padding:1.2rem 1.2rem 3rem; } }
+  @media (prefers-reduced-motion:reduce) { * { transition:none !important; } }
+  @media print { nav.toc,.controls,.progress-wrap { display:none; } details.section { border:none; } details.section > .body { display:block !important; border:none; padding-left:0; } details.section > summary::before { display:none; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" aria-label="Tâches">
+  <h2>Tâches</h2>
+  <ul>
+    <li><a href="#t1">1. Les 3 sections</a></li>
+    <li><a href="#t2">2. Manifests + CHANGELOG</a></li>
+    <li><a href="#t3">3. Validation + release</a></li>
+  </ul>
+</nav>
+<main>
+  <h1>Plan — enrichissement de <code>feat-effect-library.md</code></h1>
+  <p class="meta">
+    <strong>Goal :</strong> 3 familles de briques (Information / Bond &amp; Companion / Debt &amp; Observance) + release ttrpg-creation 1.4.0.<br>
+    <strong>Spec :</strong> <a href="../specs/2026-06-10-feat-effect-library-expansion-design.html">2026-06-10-feat-effect-library-expansion-design</a> (§4 = contenu normatif validé mot pour mot).<br>
+    <strong>Langue :</strong> les sections s'écrivent en anglais (langue du fichier existant), vocabulaire 2024 officiel.
+  </p>
+
+  <div class="progress-wrap">
+    <div class="progress-label" id="progressLabel">0 / 0 tâches (0 %)</div>
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <div class="controls">
+    <button type="button" id="expandAll">Tout déplier</button>
+    <button type="button" id="collapseAll">Tout replier</button>
+    <button type="button" id="resetChecks">Réinitialiser les cases</button>
+  </div>
+
+  <details class="section" id="t1">
+    <summary><h2>Task 1 — Les 3 sections dans feat-effect-library.md</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <div class="files">Modify: <code>plugins/ttrpg-creation/skills/feat-creator/references/feat-effect-library.md</code> — insertion entre « Magic Bricks » et « Scaling Knobs »</div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t1s1"><label for="t1s1"><strong>Step 1</strong> : écrire les 3 sections (~110–130 lignes) en anglais — Information Bricks (closed oracle / detection at range / intent reading / diagnostic, sortie ambiguë obligatoire, jamais de DD fixe), Bond &amp; Companion Bricks (shared senses / telepathic tether / positional rider / the bond's price, capteur jamais attaquant), Debt &amp; Observance Bricks (observance gate / capped inventory / non-gold currency / debt hook, régulateurs non empilables). Chaque section : préambule-règle + tableau 4 colonnes + détails + scaling + renvoi <code>examples/feat-creator-dons-zarathar.md</code></label></li>
+        <li><input type="checkbox" id="t1s2"><label for="t1s2"><strong>Step 2</strong> : vérifier — ordre des H2 (Resource → Combat → Exploration → Social → Magic → Information → Bond → Debt → Scaling), 3 renvois galerie, aucun « DC 1x » fixe introduit</label></li>
+        <li><input type="checkbox" id="t1s3"><label for="t1s3"><strong>Step 3</strong> : commit <code>feat(ttrpg-creation): expand feat-effect-library - information, bond, debt brick families</code></label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="t2">
+    <summary><h2>Task 2 — Manifests + CHANGELOG (1.4.0)</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <div class="files">Modify: <code>plugin.json</code> · <code>marketplace.json</code> · <code>CHANGELOG.md</code></div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t2s1"><label for="t2s1"><strong>Step 1</strong> : bumps 1.3.0 → 1.4.0 (descriptions inchangées)</label></li>
+        <li><input type="checkbox" id="t2s2"><label for="t2s2"><strong>Step 2</strong> : entrée CHANGELOG 1.4.0 — Ajouts (3 familles détaillées) + « Pourquoi » (première itération de la boucle galerie → références ; Drawback riders volontairement exclus)</label></li>
+        <li><input type="checkbox" id="t2s3"><label for="t2s3"><strong>Step 3</strong> : vérifier — JSON parsent, 1.4.0 ×3, plus de 1.3.0</label></li>
+        <li><input type="checkbox" id="t2s4"><label for="t2s4"><strong>Step 4</strong> : commit <code>chore(ttrpg-creation): bump to 1.4.0 - feat-effect-library expansion</code></label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="t3">
+    <summary><h2>Task 3 — Validation + release</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <ul class="checklist">
+        <li><input type="checkbox" id="t3s1"><label for="t3s1"><strong>Step 1</strong> : <code>python scripts/validate.py</code> → OK 0 erreur</label></li>
+        <li><input type="checkbox" id="t3s2"><label for="t3s2"><strong>Step 2</strong> : <code>git push origin main</code></label></li>
+        <li><input type="checkbox" id="t3s3"><label for="t3s3"><strong>Step 3</strong> : <code>claude plugin marketplace update ludomancien-skills</code> puis <code>claude plugin update ttrpg-creation@ludomancien-skills</code> → 1.3.0 → 1.4.0</label></li>
+        <li><input type="checkbox" id="t3s4"><label for="t3s4"><strong>Step 4</strong> : vérifier le cache 1.4.0 (Test-Path sur feat-effect-library.md)</label></li>
+      </ul>
+    </div>
+  </details>
+</main>
+</div>
+<script>
+(function () {
+  var STORE='plan-feat-effect-library-expansion-2026-06-10';
+  var saved={}; try { saved=JSON.parse(localStorage.getItem(STORE)||'{}'); } catch(e){}
+  var boxes=Array.prototype.slice.call(document.querySelectorAll('ul.checklist input[type=checkbox]'));
+  function persist(){ var s={}; boxes.forEach(function(b){s[b.id]=b.checked;}); try{localStorage.setItem(STORE,JSON.stringify(s));}catch(e){} }
+  function refresh(){
+    boxes.forEach(function(b){ b.closest('li').classList.toggle('done',b.checked); });
+    var done=boxes.filter(function(b){return b.checked;}).length, total=boxes.length;
+    var pct=total?Math.round(done/total*100):0;
+    document.getElementById('progressLabel').textContent=done+' / '+total+' tâches ('+pct+' %)';
+    document.getElementById('progressFill').style.width=pct+'%';
+    document.getElementById('progressBar').setAttribute('aria-valuenow',pct);
+    document.querySelectorAll('details.section').forEach(function(sec){
+      var badge=sec.querySelector('[data-badge]'); if(!badge) return;
+      var sb=Array.prototype.slice.call(sec.querySelectorAll('input[type=checkbox]'));
+      var d=sb.filter(function(b){return b.checked;}).length;
+      badge.textContent=d+'/'+sb.length;
+      badge.classList.toggle('full',d===sb.length&&sb.length>0);
+    });
+  }
+  boxes.forEach(function(b){ if(saved[b.id]) b.checked=true; b.addEventListener('change',function(){persist();refresh();}); });
+  document.getElementById('resetChecks').addEventListener('click',function(){ boxes.forEach(function(b){b.checked=false;}); persist(); refresh(); });
+  document.getElementById('expandAll').addEventListener('click',function(){ document.querySelectorAll('details.section').forEach(function(d){d.open=true;}); });
+  document.getElementById('collapseAll').addEventListener('click',function(){ document.querySelectorAll('details.section').forEach(function(d){d.open=false;}); });
+  document.querySelectorAll('nav.toc a').forEach(function(a){ a.addEventListener('click',function(){ var t=document.querySelector(a.getAttribute('href')); if(t&&t.tagName==='DETAILS') t.open=true; }); });
+  var links=Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  function spy(){ var best=null; links.forEach(function(a){ var s=document.querySelector(a.getAttribute('href')); if(s&&s.getBoundingClientRect().top<120) best=a; }); links.forEach(function(a){ a.classList.toggle('active',a===best); }); }
+  document.addEventListener('scroll',spy,{passive:true});
+  refresh(); spy();
+})();
+</script>
+</body>
+</html>
