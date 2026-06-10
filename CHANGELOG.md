@@ -2,6 +2,24 @@
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet adhère au [versioning sémantique](https://semver.org/lang/fr/) par plugin.
 
+## [1.3.0] — 2026-06-10
+
+### Ajouts
+
+- Plugin `ttrpg-creation` (v1.3.0) : **vingt-huitième skill du marketplace**.
+  - `feat-creator` — dons custom D&D 5e 2024, format PHB 2024, publication-ready. Couvre les quatre catégories du PHB 2024 : Origin feats (niveau 1 via background, sans prérequis ni ASI), General feats (niveau 4+, +1 ASI inclus — la structure half-feat universelle de 2024), Fighting Style feats (prérequis : trait Fighting Style, sans ASI), Epic Boons (niveau 19+, ASI jusqu'à 30). Un feat par appel ou set thématique de 2-4 feats liés (ex. chaîne d'un ordre de chevalerie : 1 Origin + 2 General + 1 Epic Boon) avec audit de stacking intra-set. Workflow en six étapes : Concept & Name → Category & Prerequisites → Mechanical Design (2-3 benefits max, un seul signature) → Calibration (protocole en 5 étapes contre 2-3 feats officiels *nommés*, verdict d'une ligne obligatoire) → PHB 2024 Text (vocabulaire 2024 strict, syntaxe 2014 interdite) → Lore & Plot Hooks. Livrable : entrée PHB + Design Notes (verdict de calibrage) + origine + practitioner notable + 1-2 hooks. Quatre références chargées à la demande : `feat-categories-2024.md` (anatomie des 4 catégories, exemples officiels décortiqués, arbre de routage), `power-budgets-and-benchmarks.md` (monnaie « +1 ASI ≈ ½ feat », floor/ceiling par catégorie, valeurs quantifiées, interdits par catégorie), `feat-effect-library.md` (briques mécaniques réutilisables par pilier, patterns de ressources 2024, danger zone action economy, échelle de scaling Origin → General → Epic Boon), `balance-and-anti-patterns.md` (must-pick vs trap option, catalogue de 10 anti-patterns avec fix, audit de stacking, règles Repeatable, checklist finale). Boundary : les features de classe/sous-classe ne sont pas des feats (hors scope) ; `backgrounds` reste maître des backgrounds mais délègue la conception des Origin feats custom à `feat-creator` ; validation d'un supplément existant → `ttrpg-supplement-reviewer`. 2024 uniquement.
+
+### Modifications
+
+- `backgrounds` : la section Feat délègue désormais la conception complète d'un Origin feat custom à `feat-creator` (mention croisée, 1 ligne).
+- `ttrpg-creation` : description étendue aux dons custom. Le plugin couvre maintenant 12 skills + 2 agents.
+- `marketplace.json` : version bumpée à 1.3.0, description étendue, tag `feat` ajouté. Le marketplace compte maintenant 28 skills + 3 agents.
+- `README.md` et `plugins/ttrpg-creation/README.md` : décompte mis à jour (28 skills), `feat-creator` ajouté aux tableaux.
+
+### Pourquoi un skill dédié (pas une extension de backgrounds ou de spell-creator)
+
+`backgrounds` crée des Origin feats en passant, mais sans discipline de calibrage : pas de benchmarks par catégorie, pas d'audit d'anti-patterns, et aucune couverture des General feats, Fighting Styles et Epic Boons — les trois catégories les plus demandées en homebrew après le niveau 1. `spell-creator` partage la philosophie (mécanique + narratif, calibrage contre du contenu officiel nommé) mais pas le domaine : la monnaie d'un feat est l'ASI et l'action economy, pas le spell slot. `feat-creator` reprend donc le squelette éprouvé de `spell-creator` (Before You Begin, workflow 6 étapes, références à la demande, boundary explicite) appliqué à la grammaire des feats 2024 — dont la structure half-feat universelle, spécificité 2024 que ni l'un ni l'autre ne documentait.
+
 ## [1.2.0] — 2026-05-19
 
 ### Ajouts

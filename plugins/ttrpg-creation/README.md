@@ -1,6 +1,6 @@
 # ttrpg-creation
 
-Création de contenu JDR : PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters, donjons et sorts custom, plus un agent de design itératif pour concevoir un scénario avant de l'écrire. D&D 5e (2024) par défaut, la plupart des skills sont system-agnostic.
+Création de contenu JDR : PNJ, factions, scénarios, settlements, monstres, objets magiques, encounters, donjons, sorts et dons custom, plus un agent de design itératif pour concevoir un scénario avant de l'écrire. D&D 5e (2024) par défaut, la plupart des skills sont system-agnostic.
 
 ## Skills
 
@@ -17,6 +17,7 @@ Création de contenu JDR : PNJ, factions, scénarios, settlements, monstres, obj
 | `encounter-builder` | Encounters table-ready D&D 5e 2024 — 5 types (combat, social, exploration, chase, downtime), calibrage par party, terrain + objectifs alternatifs + livrables table |
 | `dungeon-creator` | Donjons complets — 3 échelles (5-room / small 10-15 / full 16-25), 5 patterns de layout, ASCII map + room key + GM flow notes |
 | `spell-creator` | Sorts custom D&D 5e 2024 — tous niveaux (Cantrip → 9e), 8 écoles, toutes classes PHB 2024, format PHB officiel |
+| `feat-creator` | Dons custom D&D 5e 2024 — 4 catégories (Origin / General / Fighting Style / Epic Boon), format PHB officiel, calibrage contre feats nommés, mode set thématique 2–4 feats |
 
 ## Agents
 
