@@ -102,6 +102,147 @@ spend it only with triggers attached:
 - **Component waivers:** cast with hands full / observed casting
   appears mundane — texture bricks, cheap.
 
+## Information Bricks
+
+Information is the worst-calibrated benefit in homebrew because it does
+not measure in DPR — it measures in **closed questions per rest** and in
+investigation scenes saved. Working rate: 1 closed question per Long
+Rest ≈ ½ feat.
+
+| Brick | Mechanical template | Official benchmark | Indicative cost |
+|---|---|---|---|
+| **Closed oracle** | 1/Long Rest, 10 minutes of practice, question about an action within the hour → *weal / woe / ambiguous* | *Augury* (level 2, ritual) | ≈ ½ feat (Origin-grade if practice conditions are strong) |
+| **Detection at range** | Perceive ONE named anomaly category in a fixed radius (30–60 ft), passive or action | *Detect Magic* ritual; Divine Sense | ⅓–½ feat depending on category rarity |
+| **Intent reading** | After ≥ 1 minute of interaction, contested check → ONE fact defined in advance | Insight vs Deception; *Detect Thoughts* (surface) | ⅓ feat; ½ if the fact is strong |
+| **Diagnostic** | 1 minute of examination → honest mechanical data (Hit Point Dice left, poisons/diseases, damage types < 24 h) | Medicine proficiency | ⅓ feat, excellent support brick |
+
+- **Closed oracle.** Three balance levers, set together: (1) the
+  **answer menu** — never free text; weal/woe is the standard, a fourth
+  answer is a real buff; (2) the **practice conditions** — place
+  (outdoors, altar, water), medium (birds, bones, smoke), time window
+  (the action must occur within the hour): each condition removed is a
+  power step; (3) the **ambiguous answer is mandatory** ("the omens
+  scatter") — it is the GM's relief valve against investigation
+  short-circuits, and it is non-negotiable. Trap: an oracle without a
+  time window becomes a universal lie detector in interrogations.
+- **Detection at range.** The category must be named and narrow
+  (temporal anomalies, Undead, hidden passages — never "danger").
+  Passive is legal only if the category shows up at most about once per
+  typical session; otherwise require an action. Range: 30 ft Origin,
+  60 ft General, line of sight at Epic.
+- **Intent reading.** The fact learned is written **in the feat's
+  text**, not chosen at use time ("whether it conceals its identity,"
+  "the emotion it suppresses hardest," "its intent at the moment of a
+  bargain"). Two facts = twice the price. Always a contested check —
+  never a flat DC, never an automatic read below Epic (Truesight is the
+  precedent for "always true").
+- **Diagnostic.** Honest mechanical information (Hit Point Dice,
+  conditions, observed resistances) is undervalued in homebrew: it is
+  precious and steals no scene. Ceiling: it never reveals a statistic
+  hidden by design (a boss phase, a surprise immunity) without GM
+  assent.
+
+**Family scaling:** Origin = 1 closed question/Long Rest under
+conditions; General = ASI + a broader question OR lighter conditions;
+Epic = the question becomes near-permanent (Truesight, Boon of Fate).
+
+*Illustrations: see `examples/feat-creator-dons-zarathar.md` (Lecture
+des vols, Sens des strates, Lire sous le masque, Sokoros's favor).*
+
+## Bond & Companion Bricks
+
+A feat companion is **a sensor and an angle, never an attacker** — a
+second attacking body is a class feature (Beast Master). What this
+family sells: eyes elsewhere, and the price that comes with them.
+
+| Brick | Mechanical template | Official benchmark | Indicative cost |
+|---|---|---|---|
+| **Shared senses** | Action or Bonus Action: perceive through the companion; blind and deaf to your own body meanwhile | *Find Familiar* (action) | ½ feat at will; ⅓ if 1/rest |
+| **Telepathic tether** | Link at range; impressions (Origin) vs sentences (General) | Familiar 100 ft; *Telepathic* feat (one-way) | ⅓ feat; content costs more than range |
+| **Positional rider** | While the companion is within 5 ft of the target: ignore half cover and/or long-range Disadvantage | The "cover" half of *Sharpshooter*; anti-model: Pack Tactics | ½ feat — the companion exposes itself |
+| **The bond's price** | Familiar-grade stats, no HP scaling; severing the bond has a written cost | Beast Master (the precedent for loss) | The defensive half of the budget — not optional |
+
+- **Shared senses.** Three knobs: frequency (1/Long Rest → PB/Long
+  Rest → at will), action required (action → Bonus Action), and
+  self-blindness (the *Find Familiar* version leaves you blind and deaf
+  to your own body — removing that is a notable buff). At will + Bonus
+  Action is the General ceiling.
+- **Telepathic tether.** Range scales in official steps: 100 ft
+  (familiar) → 1 mile → further at high General. The real price tier is
+  not distance but **content**: simple impressions (danger, direction,
+  count) = Origin; full sentences = General; permanent sensory sharing
+  = Epic. One-way vs two-way also counts (*Telepathic* is one-way — a
+  design choice, not an oversight).
+- **Positional rider.** The safe wording sells a **viewing angle**
+  (ignore half cover, cancel long-range Disadvantage), never raw
+  Advantage — Pack Tactics on a PC breaks the attack curve. The cost is
+  built in: the brick is worth nothing unless the companion stands next
+  to the enemy, i.e. in the kill zone. Never cancel that cost with
+  another brick in the same feat (the unkillable companion is the
+  anti-pattern).
+- **The bond's price.** Write the clauses into the feat, do not leave
+  them to the GM: what happens when the companion dies (Exhaustion
+  levels, loss of benefits until a new ritual) AND what prolonged
+  separation costs. A bond feat without a severance clause is
+  incomplete — it is the defensive half of its budget.
+
+**Family scaling:** Origin = shared senses 1/rest + impressions;
+General = ASI + at-will senses + extended range + one positional rider;
+Epic = permanent sensory fusion, and the bond survives death (which is
+a problem).
+
+*Illustrations: see `examples/feat-creator-dons-zarathar.md` (Ciel
+partagé, Serres jumelles, and the Fauconnier's curse as an exemplary
+severance clause).*
+
+## Debt & Observance Bricks
+
+These regulators **replace** the standard resource patterns (1/Long
+Rest, PB/Long Rest) — they never stack with them. "1/Long Rest AND an
+observance" is double taxation and makes the feat unplayable.
+
+| Brick | Mechanical template | Official benchmark | Indicative cost |
+|---|---|---|---|
+| **Observance gate** | The resource does not recharge until an act is performed before the end of the next Long Rest | Equivalent to 1/Long Rest if the act fits an ordinary day | Neutral if playable; a disguised nerf if the act is rare |
+| **Capped inventory** | Hold N narrative charges, N = Proficiency Bonus (or a flat cap if the feat must not grow) | Luck Points (PB/Long Rest) | The cap is the balance |
+| **Non-gold currency** | The benefit trades outside gold (dreams, favors, secrets) | None — new territory | A value range in the Design Notes is mandatory |
+| **Debt hook** | The feat is born indebted, via the narrative prerequisite | The warlock pact as fiction | Zero math; high hook value |
+
+- **Observance gate.** Three writing requirements: (1) the act is
+  **scenic** (face it, watch over a sleeper, give something back to the
+  sea), not bookkeeping ("pray three times"); (2) it is **verifiable at
+  the table** — the GM can say whether it happened; (3) the text states
+  the failure case: the resource does not recharge, full stop — no
+  stacked punishment. Calibration: if the observance routinely fails
+  through campaign logistics (a sailor far from the sea), it is a
+  disguised nerf — either own that friction or widen the act.
+- **Capped inventory.** PB is the default cap; a flat cap (3) is fine
+  for a feat that should not grow. The golden rule: **the inventory's
+  contents have no mechanical value** (a held dream grants no bonus) —
+  their value is market and story, otherwise the inventory becomes a
+  bag of spell charges and changes family. If the inventory "leaks"
+  (an item escapes), the retention check must scale with the stock,
+  never a flat DC.
+- **Non-gold currency.** The only brick with no official benchmark —
+  hence the obligation: the feat's Design Notes set the market's order
+  of magnitude ("a mundane dream: a few silver; a Councilor's
+  nightmare: a full favor"), because an unpriced market makes the feat
+  either free or broken. The GM remains the market, but the designer
+  owes the GM the scale.
+- **Debt hook.** The debt is a **bonded hook**: it belongs to the GM,
+  calls at the worst moment, and never settles itself ("you still owe
+  the price"). Zero math — never use it to justify a bigger benefit: a
+  narrative debt does not buy mechanical power, it buys *presence* at
+  the table.
+
+**Family scaling:** these bricks scale by **gravity**, not power —
+Origin: the observance is a personal rite; General: it binds third
+parties; Epic: the creditor is an entity, and defaulting has mechanics.
+
+*Illustrations: see `examples/feat-creator-dons-zarathar.md` (Voix de
+l'Autel's six observances, the Voleur de Rêves' itching inventory, the
+Pirates' debt).*
+
 ## Scaling Knobs — One Concept, Three Power Levels
 
 To grow a brick from one category to the next, turn exactly one knob:
