@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan d'implémentation — feat-creator (ttrpg-creation 1.3.0)</title>
+<style>
+  :root {
+    --accent: #475569; --accent-dark: #334155; --soft: #eef1f5;
+    --border: #d7dde5; --text: #1e293b; --muted: #64748b;
+    --code-bg: #f1f5f9; --done: #94a3b8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text); background: #fff; line-height: 1.6; }
+  h1, h2, h3, h4 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; color: var(--accent-dark); line-height: 1.25; }
+  h1 { font-size: 1.7rem; margin: .2rem 0 .4rem; }
+  h2 { font-size: 1.2rem; margin: 0; display: inline; }
+  h3 { font-size: 1rem; margin: 1.1rem 0 .4rem; }
+  a { color: var(--accent); }
+  code { background: var(--code-bg); padding: .1em .35em; border-radius: 4px; font-size: .9em; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 6px; padding: .8rem 1rem; overflow-x: auto; font-size: .82rem; line-height: 1.45; }
+  pre code { background: none; padding: 0; }
+  table { border-collapse: collapse; width: 100%; margin: .8rem 0; font-size: .92rem; }
+  th, td { border: 1px solid var(--border); padding: .45rem .6rem; text-align: left; vertical-align: top; }
+  th { background: var(--soft); font-weight: 600; }
+  .layout { display: grid; grid-template-columns: 270px 1fr; min-height: 100vh; }
+  nav.toc { position: sticky; top: 0; align-self: start; height: 100vh; overflow-y: auto; background: var(--soft); border-right: 1px solid var(--border); padding: 1.2rem 1rem; font-size: .86rem; }
+  nav.toc h2 { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .6rem; }
+  nav.toc ul { list-style: none; margin: 0; padding: 0; }
+  nav.toc li { margin: .15rem 0; }
+  nav.toc a { display: block; padding: .25rem .5rem; border-radius: 5px; text-decoration: none; color: var(--text); }
+  nav.toc a:hover { background: #e2e8f0; }
+  nav.toc a.active { background: var(--accent); color: #fff; }
+  main { padding: 1.5rem 2.5rem 4rem; min-width: 0; }
+  .meta { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; }
+  .meta strong { color: var(--text); }
+  .progress-wrap { position: sticky; top: 0; background: #fff; padding: .7rem 0 .6rem; z-index: 10; border-bottom: 1px solid var(--border); margin-bottom: 1.2rem; }
+  .progress-label { font-size: .82rem; color: var(--muted); margin-bottom: .3rem; }
+  .progress-bar { height: 8px; background: var(--soft); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0; background: var(--accent); border-radius: 4px; transition: width .25s ease; }
+  .controls { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .controls button { font: inherit; font-size: .82rem; padding: .35rem .8rem; border: 1px solid var(--border); border-radius: 6px; background: #fff; color: var(--accent-dark); cursor: pointer; }
+  .controls button:hover { background: var(--soft); }
+  details.section { border: 1px solid var(--border); border-radius: 8px; margin-bottom: .8rem; background: #fff; }
+  details.section > summary { cursor: pointer; padding: .75rem 1rem; list-style: none; display: flex; align-items: center; gap: .6rem; user-select: none; }
+  details.section > summary::-webkit-details-marker { display: none; }
+  details.section > summary::before { content: "›"; font-size: 1.2rem; color: var(--muted); transition: transform .15s ease; flex-shrink: 0; }
+  details.section[open] > summary::before { transform: rotate(90deg); }
+  details.section > summary:hover { background: var(--soft); }
+  details.section > .body { padding: .2rem 1.2rem 1rem 2.4rem; border-top: 1px solid var(--border); }
+  .badge { margin-left: auto; font-size: .75rem; background: var(--soft); color: var(--accent-dark); padding: .1rem .55rem; border-radius: 999px; white-space: nowrap; }
+  .badge.full { background: var(--accent); color: #fff; }
+  ul.checklist { list-style: none; padding-left: .2rem; }
+  ul.checklist li { margin: .4rem 0; display: flex; align-items: flex-start; gap: .55rem; }
+  ul.checklist input[type=checkbox] { margin-top: .3rem; width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  ul.checklist label { cursor: pointer; }
+  ul.checklist li.done > label { text-decoration: line-through; color: var(--done); }
+  .files { font-size: .85rem; color: var(--muted); background: var(--soft); border-radius: 6px; padding: .5rem .8rem; margin: .5rem 0; }
+  .callout { border: 1px solid #c4d0de; background: #f3f7fb; border-radius: 8px; padding: .7rem 1rem; font-size: .92rem; margin: .8rem 0; }
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    nav.toc { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+    main { padding: 1.2rem 1.2rem 3rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media print {
+    nav.toc, .controls, .progress-wrap { display: none; }
+    details.section { border: none; }
+    details.section > .body { display: block !important; border: none; padding-left: 0; }
+    details.section > summary::before { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" aria-label="Table des matières">
+  <h2>Tâches</h2>
+  <ul>
+    <li><a href="#t0">Données de référence 2024</a></li>
+    <li><a href="#t1">1. feat-categories-2024.md</a></li>
+    <li><a href="#t2">2. power-budgets-and-benchmarks.md</a></li>
+    <li><a href="#t3">3. feat-effect-library.md</a></li>
+    <li><a href="#t4">4. balance-and-anti-patterns.md</a></li>
+    <li><a href="#t5">5. SKILL.md</a></li>
+    <li><a href="#t6">6. Mention croisée backgrounds</a></li>
+    <li><a href="#t7">7. Manifests JSON</a></li>
+    <li><a href="#t8">8. READMEs + CHANGELOG</a></li>
+    <li><a href="#t9">9. Validation finale</a></li>
+  </ul>
+</nav>
+<main>
+  <h1>Plan — skill <code>feat-creator</code></h1>
+  <p class="meta">
+    <strong>Goal :</strong> ajouter feat-creator (feats D&amp;D 5e 2024, 4 catégories PHB) au plugin ttrpg-creation et publier la v1.3.0.<br>
+    <strong>Architecture :</strong> pattern spell-creator — SKILL.md + 4 références à la demande ; manifests, READMEs, CHANGELOG, mention croisée backgrounds.<br>
+    <strong>Spec :</strong> <a href="../specs/2026-06-10-feat-creator-design.html">2026-06-10-feat-creator-design</a> &nbsp;·&nbsp; <strong>Étalon :</strong> <code>spell-creator</code>
+  </p>
+
+  <div class="progress-wrap">
+    <div class="progress-label" id="progressLabel">0 / 0 tâches (0 %)</div>
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="controls">
+    <button type="button" id="expandAll">Tout déplier</button>
+    <button type="button" id="collapseAll">Tout replier</button>
+    <button type="button" id="resetChecks">Réinitialiser les cases</button>
+  </div>
+
+  <details class="section" id="t0">
+    <summary><h2>Données de référence D&amp;D 5e 2024</h2></summary>
+    <div class="body">
+      <p>Données dures du PHB 2024 utilisées par les tâches 1–5 (ne pas en inventer d'autres) :</p>
+      <ul>
+        <li><strong>Origin feats (10)</strong> : Alert, Crafter, Healer, Lucky, Magic Initiate, Musician, Savage Attacker, Skilled, Tavern Brawler, Tough.</li>
+        <li><strong>General feats (niv. 4+, +1 ASI)</strong> : Actor, Athlete, Charger, Chef, Crossbow Expert, Crusher, Defensive Duelist, Dual Wielder, Durable, Elemental Adept, Fey-Touched, Grappler, Great Weapon Master, Inspiring Leader, Keen Mind, Mage Slayer, Mounted Combatant, Observant, Piercer, Poisoner, Polearm Master, Resilient, Ritual Caster, Sentinel, Shadow-Touched, Sharpshooter, Shield Master, Skill Expert, Skulker, Slasher, Speedy, Spell Sniper, Telekinetic, Telepathic, War Caster, Weapon Master… (+ feats d'armure et Martial Weapon Training).</li>
+        <li><strong>Fighting Style feats (10)</strong> : Archery, Blind Fighting, Defense, Dueling, Great Weapon Fighting, Interception, Protection, Thrown Weapon Fighting, Two-Weapon Fighting, Unarmed Fighting.</li>
+        <li><strong>Epic Boons (niv. 19+, ASI jusqu'à 30)</strong> : Combat Prowess, Dimensional Travel, Energy Resistance, Fate, Fortitude, Irresistible Offense, Recovery, Skill, Speed, Spell Recall, the Night Spirit, Truesight.</li>
+      </ul>
+      <pre><code>#### Feat Name
+*General Feat (Prerequisite: Level 4+, Strength 13+)*
+
+You gain the following benefits.
+
+**Ability Score Increase.** Increase your Strength score by 1, to a maximum of 20.
+
+**Named Benefit.** Benefit text using 2024 vocabulary.</code></pre>
+      <p class="callout">💡 Vocabulaire 2024 obligatoire : Advantage/Disadvantage capitalisés, Heroic Inspiration, « per Proficiency Bonus », Long/Short Rest capitalisés. Syntaxe 2014 interdite.</p>
+    </div>
+  </details>
+
+  <details class="section" id="t1">
+    <summary><h2>Task 1 — references/feat-categories-2024.md</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <div class="files">Create: <code>plugins/ttrpg-creation/skills/feat-creator/references/feat-categories-2024.md</code></div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t1s1"><label for="t1s1"><strong>Step 1</strong> : écrire le fichier (~200–280 lignes) — tableau comparatif des 4 catégories, anatomie de chacune (structure d'en-tête exacte, ASI, prérequis légaux), feats officiels listés avec une ligne d'analyse, dissections (Magic Initiate, Skilled, GWM, Resilient, War Caster, Defense, Dueling, Combat Prowess, Fate), arbre de décision « Choosing the Right Category »</label></li>
+        <li><input type="checkbox" id="t1s2"><label for="t1s2"><strong>Step 2</strong> : vérifier la structure (H1 unique, 4 catégories couvertes, tableau présent)</label></li>
+        <li><input type="checkbox" id="t1s3"><label for="t1s3"><strong>Step 3</strong> : commit <code>feat(ttrpg-creation): add feat-creator reference — feat categories 2024</code></label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="t2">
+    <summary><h2>Task 2 — references/power-budgets-and-benchmarks.md</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <div class="files">Create: <code>plugins/ttrpg-creation/skills/feat-creator/references/power-budgets-and-benchmarks.md</code></div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t2s1"><label for="t2s1"><strong>Step 1</strong> : écrire le fichier (~200–280 lignes) — monnaie « +1 ASI ≈ ½ feat », floor/ceiling par catégorie avec feats officiels nommés (Musician↔Lucky ; Keen Mind↔GWM ; Protection↔Defense ; Boon of Skill↔Combat Prowess), tableau de valeurs quantifiées (+1 AC, Advantage permanent, 1/Long Rest, PB uses, +2 HP/level…), interdits par catégorie, protocole de calibrage en 5 étapes</label></li>
+        <li><input type="checkbox" id="t2s2"><label for="t2s2"><strong>Step 2</strong> : vérifier — chaque benchmark cite des feats officiels nommés</label></li>
+        <li><input type="checkbox" id="t2s3"><label for="t2s3"><strong>Step 3</strong> : commit <code>feat(ttrpg-creation): add feat-creator reference — power budgets and benchmarks</code></label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="t3">
+    <summary><h2>Task 3 — references/feat-effect-library.md</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <div class="files">Create: <code>plugins/ttrpg-creation/skills/feat-creator/references/feat-effect-library.md</code></div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t3s1"><label for="t3s1"><strong>Step 1</strong> : écrire le fichier (~220–300 lignes) — patterns de ressources 2024, briques combat (riders, défense, action economy = danger zone, Weapon Mastery), exploration, social, magie (patterns Magic Initiate / Fey-Touched / War Caster / Ritual Caster), scaling knobs Origin → General → Epic Boon avec tableau d'exemples</label></li>
+        <li><input type="checkbox" id="t3s2"><label for="t3s2"><strong>Step 2</strong> : vérifier — chaque brique cite au moins un feat officiel ; danger zone marquée</label></li>
+        <li><input type="checkbox" id="t3s3"><label for="t3s3"><strong>Step 3</strong> : commit <code>feat(ttrpg-creation): add feat-creator reference — effect library</code></label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="t4">
+    <summary><h2>Task 4 — references/balance-and-anti-patterns.md</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <div class="files">Create: <code>plugins/ttrpg-creation/skills/feat-creator/references/balance-and-anti-patterns.md</code></div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t4s1"><label for="t4s1"><strong>Step 1</strong> : écrire le fichier (~180–250 lignes) — must-pick vs trap option (avec tests), catalogue de 8–10 anti-patterns (stacking passif, marche sur feature de classe, double dip ASI, couteau suisse, prérequis cosmétique, Origin de combat chiffré, action economy infinie, feat-impôt, scaling oublié, boon timide) chacun avec exemple raté + fix, protocole d'audit de stacking, règles Repeatable, checklist finale 10 cases</label></li>
+        <li><input type="checkbox" id="t4s2"><label for="t4s2"><strong>Step 2</strong> : vérifier — 8–10 anti-patterns avec exemple + fix ; checklist présente</label></li>
+        <li><input type="checkbox" id="t4s3"><label for="t4s3"><strong>Step 3</strong> : commit <code>feat(ttrpg-creation): add feat-creator reference — balance and anti-patterns</code></label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="t5">
+    <summary><h2>Task 5 — SKILL.md</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <div class="files">Create: <code>plugins/ttrpg-creation/skills/feat-creator/SKILL.md</code></div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t5s1"><label for="t5s1"><strong>Step 1</strong> : frontmatter — description multiline modèle spell-creator : 4 catégories, livrable PHB + calibrage + lore + hooks, un feat ou set 2–4, triggers FR/EN (« crée un don », « create a feat », « epic boon for my barbarian », « half-feat homebrew », « feat chain »…), boundary (class features hors scope, backgrounds → origin custom → ici, spell-creator / magic-item-creator / ttrpg-supplement-reviewer), 2024 only</label></li>
+        <li><input type="checkbox" id="t5s2"><label for="t5s2"><strong>Step 2</strong> : corps (~250–350 lignes) — Scope and Boundary (tableau), Before You Begin (5 points), workflow 6 étapes (Concept &amp; Name → Category &amp; Prerequisites → Mechanical Design → Calibration → PHB 2024 Text → Lore &amp; Hooks), Output Format (gabarit complet), Thematic Set Mode, Common Requests</label></li>
+        <li><input type="checkbox" id="t5s3"><label for="t5s3"><strong>Step 3</strong> : vérifier — YAML valide, les 4 références pointées, format PHB présent</label></li>
+        <li><input type="checkbox" id="t5s4"><label for="t5s4"><strong>Step 4</strong> : commit <code>feat(ttrpg-creation): add feat-creator skill (SKILL.md)</code></label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="t6">
+    <summary><h2>Task 6 — Mention croisée backgrounds</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <div class="files">Modify: <code>plugins/ttrpg-creation/skills/backgrounds/SKILL.md</code> (section « ### 3. Feat »)</div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t6s1"><label for="t6s1"><strong>Step 1</strong> : ajouter la ligne de délégation vers feat-creator pour les Origin feats custom</label></li>
+        <li><input type="checkbox" id="t6s2"><label for="t6s2"><strong>Step 2</strong> : vérifier — modification de 1–2 lignes seulement</label></li>
+        <li><input type="checkbox" id="t6s3"><label for="t6s3"><strong>Step 3</strong> : commit <code>docs(ttrpg-creation): backgrounds delegates custom origin feats to feat-creator</code></label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="t7">
+    <summary><h2>Task 7 — Manifests JSON</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <div class="files">Modify: <code>plugins/ttrpg-creation/.claude-plugin/plugin.json</code> · <code>.claude-plugin/marketplace.json</code></div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t7s1"><label for="t7s1"><strong>Step 1</strong> : plugin.json — version 1.3.0 + segment description « , dons custom (feats 2024 : Origin / General / Fighting Style / Epic Boon) »</label></li>
+        <li><input type="checkbox" id="t7s2"><label for="t7s2"><strong>Step 2</strong> : marketplace.json — version 1.3.0, même description, tag « feats » si tableau tags présent</label></li>
+        <li><input type="checkbox" id="t7s3"><label for="t7s3"><strong>Step 3</strong> : vérifier que les deux JSON parsent (ConvertFrom-Json)</label></li>
+        <li><input type="checkbox" id="t7s4"><label for="t7s4"><strong>Step 4</strong> : commit <code>chore(ttrpg-creation): bump to 1.3.0 — feat-creator</code></label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="t8">
+    <summary><h2>Task 8 — READMEs + CHANGELOG</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <div class="files">Modify: <code>README.md</code> · <code>plugins/ttrpg-creation/README.md</code> · <code>CHANGELOG.md</code></div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t8s1"><label for="t8s1"><strong>Step 1</strong> : ligne feat-creator dans le tableau du README racine (après spell-creator)</label></li>
+        <li><input type="checkbox" id="t8s2"><label for="t8s2"><strong>Step 2</strong> : ligne équivalente dans le README du plugin (suivre son format)</label></li>
+        <li><input type="checkbox" id="t8s3"><label for="t8s3"><strong>Step 3</strong> : entrée CHANGELOG ttrpg-creation 1.3.0 (suivre le format existant)</label></li>
+        <li><input type="checkbox" id="t8s4"><label for="t8s4"><strong>Step 4</strong> : commit <code>docs: feat-creator in READMEs and CHANGELOG (ttrpg-creation 1.3.0)</code></label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="t9">
+    <summary><h2>Task 9 — Validation finale</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <ul class="checklist">
+        <li><input type="checkbox" id="t9s1"><label for="t9s1"><strong>Step 1</strong> : lancer l'agent plugin-dev:plugin-validator sur <code>plugins/ttrpg-creation</code></label></li>
+        <li><input type="checkbox" id="t9s2"><label for="t9s2"><strong>Step 2</strong> : cohérence 1.3.0 (3 fichiers) ; plus aucune occurrence 1.2.0 pour ttrpg-creation</label></li>
+        <li><input type="checkbox" id="t9s3"><label for="t9s3"><strong>Step 3</strong> : les 4 références pointées dans SKILL.md (Grep)</label></li>
+        <li><input type="checkbox" id="t9s4"><label for="t9s4"><strong>Step 4</strong> : corriger les défauts relevés + commit final si corrections</label></li>
+      </ul>
+    </div>
+  </details>
+</main>
+</div>
+
+<script>
+(function () {
+  var STORE = 'plan-feat-creator-2026-06-10';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) {}
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('ul.checklist input[type=checkbox]'));
+  function persist() {
+    var state = {};
+    boxes.forEach(function (b) { state[b.id] = b.checked; });
+    try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) {}
+  }
+  function refresh() {
+    boxes.forEach(function (b) { b.closest('li').classList.toggle('done', b.checked); });
+    var done = boxes.filter(function (b) { return b.checked; }).length;
+    var total = boxes.length;
+    var pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progressLabel').textContent = done + ' / ' + total + ' tâches (' + pct + ' %)';
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressBar').setAttribute('aria-valuenow', pct);
+    document.querySelectorAll('details.section').forEach(function (sec) {
+      var badge = sec.querySelector('[data-badge]');
+      if (!badge) return;
+      var secBoxes = Array.prototype.slice.call(sec.querySelectorAll('input[type=checkbox]'));
+      var d = secBoxes.filter(function (b) { return b.checked; }).length;
+      badge.textContent = d + '/' + secBoxes.length;
+      badge.classList.toggle('full', d === secBoxes.length && secBoxes.length > 0);
+    });
+  }
+  boxes.forEach(function (b) {
+    if (saved[b.id]) b.checked = true;
+    b.addEventListener('change', function () { persist(); refresh(); });
+  });
+  document.getElementById('resetChecks').addEventListener('click', function () {
+    boxes.forEach(function (b) { b.checked = false; }); persist(); refresh();
+  });
+  document.getElementById('expandAll').addEventListener('click', function () {
+    document.querySelectorAll('details.section').forEach(function (d) { d.open = true; });
+  });
+  document.getElementById('collapseAll').addEventListener('click', function () {
+    document.querySelectorAll('details.section').forEach(function (d) { d.open = false; });
+  });
+  document.querySelectorAll('nav.toc a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target && target.tagName === 'DETAILS') target.open = true;
+    });
+  });
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  function spy() {
+    var best = null;
+    links.forEach(function (a) {
+      var sec = document.querySelector(a.getAttribute('href'));
+      if (sec && sec.getBoundingClientRect().top < 120) best = a;
+    });
+    links.forEach(function (a) { a.classList.toggle('active', a === best); });
+  }
+  document.addEventListener('scroll', spy, { passive: true });
+  refresh(); spy();
+})();
+</script>
+</body>
+</html>
