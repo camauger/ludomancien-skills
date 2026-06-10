@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spec — enrichissement feat-effect-library (feat-creator, v1.4.0)</title>
+<style>
+  :root { --accent:#475569; --accent-dark:#334155; --soft:#eef1f5; --border:#d7dde5; --text:#1e293b; --muted:#64748b; --code-bg:#f1f5f9; --done:#94a3b8; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; color:var(--text); background:#fff; line-height:1.6; }
+  h1,h2,h3 { font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; color:var(--accent-dark); line-height:1.25; }
+  h1 { font-size:1.65rem; margin:.2rem 0 .4rem; }
+  h2 { font-size:1.2rem; margin:0; display:inline; }
+  h3 { font-size:1rem; margin:1.1rem 0 .4rem; }
+  code { background:var(--code-bg); padding:.1em .35em; border-radius:4px; font-size:.9em; font-family:ui-monospace,"Cascadia Code",Consolas,monospace; }
+  table { border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.88rem; }
+  th,td { border:1px solid var(--border); padding:.4rem .55rem; text-align:left; vertical-align:top; }
+  th { background:var(--soft); font-weight:600; }
+  tr:nth-child(even) td { background:#fafbfc; }
+  .layout { display:grid; grid-template-columns:260px 1fr; min-height:100vh; }
+  nav.toc { position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto; background:var(--soft); border-right:1px solid var(--border); padding:1.2rem 1rem; font-size:.87rem; }
+  nav.toc h2 { display:block; font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:.6rem; }
+  nav.toc ul { list-style:none; margin:0; padding:0; }
+  nav.toc li { margin:.15rem 0; }
+  nav.toc a { display:block; padding:.25rem .5rem; border-radius:5px; text-decoration:none; color:var(--text); }
+  nav.toc a:hover { background:#e2e8f0; }
+  nav.toc a.active { background:var(--accent); color:#fff; }
+  main { padding:1.5rem 2.5rem 4rem; min-width:0; }
+  .meta { color:var(--muted); font-size:.9rem; margin-bottom:1rem; }
+  .meta strong { color:var(--text); }
+  .progress-wrap { position:sticky; top:0; background:#fff; padding:.7rem 0 .6rem; z-index:10; border-bottom:1px solid var(--border); margin-bottom:1.2rem; }
+  .progress-label { font-size:.82rem; color:var(--muted); margin-bottom:.3rem; }
+  .progress-bar { height:8px; background:var(--soft); border-radius:4px; overflow:hidden; }
+  .progress-fill { height:100%; width:0; background:var(--accent); border-radius:4px; transition:width .25s ease; }
+  .controls { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.2rem; }
+  .controls button { font:inherit; font-size:.82rem; padding:.35rem .8rem; border:1px solid var(--border); border-radius:6px; background:#fff; color:var(--accent-dark); cursor:pointer; }
+  .controls button:hover { background:var(--soft); }
+  details.section { border:1px solid var(--border); border-radius:8px; margin-bottom:.8rem; background:#fff; }
+  details.section > summary { cursor:pointer; padding:.75rem 1rem; list-style:none; display:flex; align-items:center; gap:.6rem; user-select:none; }
+  details.section > summary::-webkit-details-marker { display:none; }
+  details.section > summary::before { content:"›"; font-size:1.2rem; color:var(--muted); transition:transform .15s ease; flex-shrink:0; }
+  details.section[open] > summary::before { transform:rotate(90deg); }
+  details.section > summary:hover { background:var(--soft); }
+  details.section > .body { padding:.2rem 1.2rem 1rem 2.4rem; border-top:1px solid var(--border); }
+  .badge { margin-left:auto; font-size:.75rem; background:var(--soft); color:var(--accent-dark); padding:.1rem .55rem; border-radius:999px; white-space:nowrap; }
+  .badge.full { background:var(--accent); color:#fff; }
+  ul.checklist { list-style:none; padding-left:.2rem; }
+  ul.checklist li { margin:.35rem 0; display:flex; align-items:flex-start; gap:.55rem; }
+  ul.checklist input[type=checkbox] { margin-top:.3rem; width:16px; height:16px; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
+  ul.checklist label { cursor:pointer; }
+  ul.checklist li.done label { text-decoration:line-through; color:var(--done); }
+  .callout { border:1px solid #c4d0de; background:#f3f7fb; border-radius:8px; padding:.7rem 1rem; font-size:.92rem; margin:.8rem 0; }
+  .callout.warn { border-color:#e6d9b8; background:#fdf9ee; }
+  @media (max-width:860px) { .layout { grid-template-columns:1fr; } nav.toc { position:static; height:auto; border-right:none; border-bottom:1px solid var(--border); } main { padding:1.2rem 1.2rem 3rem; } }
+  @media (prefers-reduced-motion:reduce) { * { transition:none !important; } }
+  @media print { nav.toc,.controls,.progress-wrap { display:none; } details.section { border:none; } details.section > .body { display:block !important; border:none; padding-left:0; } details.section > summary::before { display:none; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" aria-label="Table des matières">
+  <h2>Sommaire</h2>
+  <ul>
+    <li><a href="#s1">1. Mission</a></li>
+    <li><a href="#s2">2. Ancrage</a></li>
+    <li><a href="#s3">3. Emplacement & structure</a></li>
+    <li><a href="#s41">4.1 Information Bricks</a></li>
+    <li><a href="#s42">4.2 Bond & Companion</a></li>
+    <li><a href="#s43">4.3 Debt & Observance</a></li>
+    <li><a href="#s5">5. Intégrations</a></li>
+    <li><a href="#s6">6. Critères de succès</a></li>
+    <li><a href="#s7">7. Hors scope</a></li>
+  </ul>
+</nav>
+<main>
+  <h1>Spec — enrichissement de <code>feat-effect-library.md</code></h1>
+  <p class="meta"><strong>Skill :</strong> feat-creator (ttrpg-creation) · <strong>Date :</strong> 2026-06-10 · <strong>Statut :</strong> approuvé · <strong>Version cible :</strong> 1.4.0 (MINOR)</p>
+
+  <div class="progress-wrap">
+    <div class="progress-label" id="progressLabel">0 / 0 tâches (0 %)</div>
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <div class="controls">
+    <button type="button" id="expandAll">Tout déplier</button>
+    <button type="button" id="collapseAll">Tout replier</button>
+    <button type="button" id="resetChecks">Réinitialiser les cases</button>
+  </div>
+
+  <details class="section" id="s1">
+    <summary><h2>1. Mission</h2></summary>
+    <div class="body">
+      <p>Ajouter trois familles de briques mécaniques à <code>references/feat-effect-library.md</code>, révélées manquantes par le premier corpus d'usage réel (10 dons Zarathar, curés dans <code>examples/feat-creator-dons-zarathar.md</code>) : <strong>Information Bricks</strong>, <strong>Bond &amp; Companion Bricks</strong>, <strong>Debt &amp; Observance Bricks</strong>.</p>
+      <p class="callout warn">⚠️ Écarté explicitement (choix utilisateur) : les Drawback riders / malédictions — signature du format maison Zarathar, hors skill générique pour l'instant.</p>
+    </div>
+  </details>
+
+  <details class="section" id="s2">
+    <summary><h2>2. Ancrage</h2></summary>
+    <div class="body">
+      <p><strong>Officiel + exemple curé</strong> : chaque brique s'étalonne sur des feats, sorts ou features officiels 2024 (Augury, Detect Magic, Find Familiar, Telepathic, Sharpshooter, Luck Points, Beast Master…) ; chaque section se clôt par un renvoi <em>Illustrations: see <code>examples/feat-creator-dons-zarathar.md</code></em> — le mécanisme prévu par le README de la galerie.</p>
+    </div>
+  </details>
+
+  <details class="section" id="s3">
+    <summary><h2>3. Emplacement et structure</h2></summary>
+    <div class="body">
+      <p>Insertion <strong>entre « Magic Bricks » et « Scaling Knobs »</strong>, ordre : Information → Bond &amp; Companion → Debt &amp; Observance. Chaque section = préambule-règle (1–3 phrases) + tableau (brique / gabarit / étalon / coût) + détails par brique + scaling de famille + renvoi galerie. Fichier : ~120 → ~240 lignes.</p>
+    </div>
+  </details>
+
+  <details class="section" id="s41">
+    <summary><h2>4.1 Information Bricks</h2></summary>
+    <div class="body">
+      <p><strong>Règle de famille :</strong> l'information se mesure en <em>questions fermées par repos</em> (1 question fermée/LR ≈ ½ feat), pas en DPR.</p>
+      <table>
+        <thead><tr><th>Brique</th><th>Gabarit</th><th>Étalon</th><th>Coût</th></tr></thead>
+        <tbody>
+          <tr><td>Closed oracle</td><td>1/LR, 10 min d'exercice, question sur une action dans l'heure → <em>weal / woe / ambiguous</em></td><td>Sort <em>Augury</em> (niv. 2, rituel)</td><td>≈ ½ feat</td></tr>
+          <tr><td>Detection at range</td><td>UNE catégorie d'anomalie, rayon fixe 30–60 ft</td><td><em>Detect Magic</em> rituel ; Divine Sense</td><td>⅓–½ feat selon rareté</td></tr>
+          <tr><td>Intent reading</td><td>≥ 1 min d'interaction, jet opposé → UN fait défini d'avance</td><td>Insight vs Deception ; <em>Detect Thoughts</em> (surface)</td><td>⅓ feat ; ½ si fait fort</td></tr>
+          <tr><td>Diagnostic</td><td>1 min d'examen → données mécaniques honnêtes (HP Dice, poisons, dégâts &lt; 24 h)</td><td>Maîtrise Medicine</td><td>⅓ feat, support</td></tr>
+        </tbody>
+      </table>
+      <ul>
+        <li><strong>Closed oracle</strong> — 3 leviers : menu de réponses (jamais de texte libre), conditions d'exercice (lieu / médium / fenêtre — chaque condition retirée = un cran de puissance), sortie ambiguë <strong>obligatoire</strong> (soupape anti-court-circuit d'enquête). Anti-piège : sans fenêtre temporelle → détecteur de mensonge universel.</li>
+        <li><strong>Detection at range</strong> — catégorie nommée et étroite ; passif légal si ≤ 1/session ; portée 30 ft Origin / 60 ft General / horizon Epic.</li>
+        <li><strong>Intent reading</strong> — le fait est écrit dans le feat ; deux faits = deux fois le prix ; toujours opposé, jamais de DD fixe ni d'automatisme sous l'Epic.</li>
+        <li><strong>Diagnostic</strong> — précieux et sous-coté ; ne révèle jamais une statistique cachée par design sans accord MJ.</li>
+      </ul>
+      <p><strong>Scaling :</strong> Origin = 1 question fermée/LR sous conditions ; General = ASI + question élargie OU conditions allégées ; Epic = quasi permanent.<br><em>Illustrations : Lecture des vols, Sens des strates, Lire sous le masque, faveur de Sokoros.</em></p>
+    </div>
+  </details>
+
+  <details class="section" id="s42">
+    <summary><h2>4.2 Bond &amp; Companion Bricks</h2></summary>
+    <div class="body">
+      <p><strong>Règle de famille :</strong> le compagnon de feat est <em>un capteur et un angle, jamais un attaquant</em> — un second corps offensif est une feature de classe (Beast Master).</p>
+      <table>
+        <thead><tr><th>Brique</th><th>Gabarit</th><th>Étalon</th><th>Coût</th></tr></thead>
+        <tbody>
+          <tr><td>Shared senses</td><td>Action ou BA : percevoir par le compagnon ; aveugle/sourd à son corps pendant ce temps</td><td><em>Find Familiar</em></td><td>½ feat à volonté ; ⅓ si 1/repos</td></tr>
+          <tr><td>Telepathic tether</td><td>Lien à portée ; impressions (Origin) vs phrases (General)</td><td>Familier 100 ft ; feat <em>Telepathic</em> (unilatéral)</td><td>⅓ feat ; le contenu coûte plus que la portée</td></tr>
+          <tr><td>Positional rider</td><td>Compagnon à 5 ft de la cible : ignorer abri partiel et/ou portée longue</td><td>Moitié « abri » de <em>Sharpshooter</em> ; anti-modèle Pack Tactics</td><td>½ feat — le compagnon s'expose</td></tr>
+          <tr><td>The bond's price</td><td>Stats de familier figées ; rupture du lien = coût écrit</td><td>Beast Master (précédent de la perte)</td><td>La moitié défensive du budget — non optionnel</td></tr>
+        </tbody>
+      </table>
+      <ul>
+        <li><strong>Shared senses</strong> — 3 knobs : fréquence (1/LR → PB/LR → à volonté), action requise (action → BA), cécité propre (la retirer = buff notable). Plafond General : à volonté + BA.</li>
+        <li><strong>Telepathic tether</strong> — portée par bonds officiels (100 ft → 1 mile → 8 km) ; le vrai palier est le contenu (impressions = Origin, phrases = General, fusion = Epic) ; unilatéral vs bilatéral est un choix de design.</li>
+        <li><strong>Positional rider</strong> — vendre un <em>angle de vue</em>, jamais l'avantage brut ; coût intégré (zone de mort) — jamais supprimé par une autre brique (compagnon intuable = anti-pattern).</li>
+        <li><strong>The bond's price</strong> — clauses écrites : mort du compagnon (épuisement, perte jusqu'à re-rituel) ET séparation prolongée. Sans clause de rupture, le feat est incomplet.</li>
+      </ul>
+      <p><strong>Scaling :</strong> Origin = sens partagés 1/repos + impressions ; General = ASI + à volonté + portée + un rider positionnel ; Epic = fusion permanente, le lien survit à la mort (et c'est un problème).<br><em>Illustrations : Ciel partagé, Serres jumelles, malédiction du Fauconnier.</em></p>
+    </div>
+  </details>
+
+  <details class="section" id="s43">
+    <summary><h2>4.3 Debt &amp; Observance Bricks</h2></summary>
+    <div class="body">
+      <p><strong>Règle de famille :</strong> ces régulateurs <em>remplacent</em> les patterns de ressource standard — jamais d'empilement (« 1/LR ET observance » = double taxation injouable).</p>
+      <table>
+        <thead><tr><th>Brique</th><th>Gabarit</th><th>Étalon</th><th>Coût</th></tr></thead>
+        <tbody>
+          <tr><td>Observance gate</td><td>La ressource ne recharge qu'après un acte accompli avant la fin du prochain repos long</td><td>Équivalent 1/LR si l'acte tient dans une journée ordinaire</td><td>Neutre si jouable ; nerf déguisé si l'acte est rare</td></tr>
+          <tr><td>Capped inventory</td><td>N charges narratives, N = PB (ou plafond fixe)</td><td>Luck Points</td><td>Le plafond est la balance</td></tr>
+          <tr><td>Non-gold currency</td><td>Bénéfice monnayable hors or (rêves, faveurs, secrets)</td><td>Aucun — territoire neuf</td><td>Fourchette de valeur obligatoire en Design Notes</td></tr>
+          <tr><td>Debt hook</td><td>Le feat naît endetté via le prérequis narratif</td><td>Le pacte de warlock comme fiction</td><td>Zéro math ; valeur d'accroche</td></tr>
+        </tbody>
+      </table>
+      <ul>
+        <li><strong>Observance gate</strong> — acte scénique (pas comptable), vérifiable à la table, échec écrit (la ressource ne recharge pas, point). Échec fréquent par logistique = nerf déguisé : l'assumer ou élargir.</li>
+        <li><strong>Capped inventory</strong> — le contenu n'a <em>pas</em> de valeur mécanique (sinon : sac de charges de sort, autre famille) ; un jet de rétention scale avec le stock, jamais un DD fixe.</li>
+        <li><strong>Non-gold currency</strong> — les Design Notes fixent l'ordre de grandeur du marché, sinon le don est gratuit ou cassé.</li>
+        <li><strong>Debt hook</strong> — appartient au MJ, ne s'auto-règle jamais, n'achète pas de puissance mécanique : il achète de la présence.</li>
+      </ul>
+      <p><strong>Scaling :</strong> par <em>gravité</em> — Origin : rituel personnel ; General : engage des tiers ; Epic : le créancier est une entité et le non-paiement a une mécanique.<br><em>Illustrations : les six observances de Voix de l'Autel, l'inventaire qui gratte du Voleur de Rêves, la dette des Pirates.</em></p>
+    </div>
+  </details>
+
+  <details class="section" id="s5">
+    <summary><h2>5. Intégrations</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <ul class="checklist">
+        <li><input type="checkbox" id="i1"><label for="i1"><code>plugin.json</code> : version 1.4.0</label></li>
+        <li><input type="checkbox" id="i2"><label for="i2"><code>marketplace.json</code> : metadata.version 1.4.0</label></li>
+        <li><input type="checkbox" id="i3"><label for="i3"><code>CHANGELOG.md</code> : entrée 1.4.0 (Ajouts + « Pourquoi » sur la boucle galerie → références)</label></li>
+        <li><input type="checkbox" id="i4"><label for="i4">Push + <code>claude plugin marketplace update</code> + <code>claude plugin update</code></label></li>
+      </ul>
+      <p>Descriptions plugin/marketplace, READMEs et SKILL.md : <strong>inchangés</strong>.</p>
+    </div>
+  </details>
+
+  <details class="section" id="s6">
+    <summary><h2>6. Critères de succès</h2><span class="badge" data-badge></span></summary>
+    <div class="body">
+      <ul class="checklist">
+        <li><input type="checkbox" id="c1"><label for="c1">Les 3 sections suivent la structure : préambule-règle, tableau 4 colonnes, détails par brique, scaling de famille, renvoi galerie</label></li>
+        <li><input type="checkbox" id="c2"><label for="c2">Chaque brique cite un étalon officiel 2024 (ou « territoire neuf » + obligation compensatoire)</label></li>
+        <li><input type="checkbox" id="c3"><label for="c3">Règles dures préservées : sortie ambiguë obligatoire ; capteur jamais attaquant ; régulateurs non empilables ; rétention scalante, jamais de DD fixe</label></li>
+        <li><input type="checkbox" id="c4"><label for="c4">Insertion entre « Magic Bricks » et « Scaling Knobs » ; fichier ~240 lignes lisible</label></li>
+        <li><input type="checkbox" id="c5"><label for="c5">Version 1.4.0 cohérente ; validate.py passe ; plugin installé mis à jour</label></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section" id="s7">
+    <summary><h2>7. Hors scope</h2></summary>
+    <div class="body">
+      <ul>
+        <li>Drawback riders / malédictions (choix utilisateur — signature Zarathar)</li>
+        <li>Toute modification de SKILL.md, des autres références, des READMEs</li>
+        <li>Nouveaux benchmarks dans power-budgets-and-benchmarks.md (les coûts indicatifs vivent dans les tableaux de briques)</li>
+      </ul>
+    </div>
+  </details>
+</main>
+</div>
+<script>
+(function () {
+  var STORE='spec-feat-effect-library-expansion-2026-06-10';
+  var saved={}; try { saved=JSON.parse(localStorage.getItem(STORE)||'{}'); } catch(e){}
+  var boxes=Array.prototype.slice.call(document.querySelectorAll('ul.checklist input[type=checkbox]'));
+  function persist(){ var s={}; boxes.forEach(function(b){s[b.id]=b.checked;}); try{localStorage.setItem(STORE,JSON.stringify(s));}catch(e){} }
+  function refresh(){
+    boxes.forEach(function(b){ b.closest('li').classList.toggle('done',b.checked); });
+    var done=boxes.filter(function(b){return b.checked;}).length, total=boxes.length;
+    var pct=total?Math.round(done/total*100):0;
+    document.getElementById('progressLabel').textContent=done+' / '+total+' tâches ('+pct+' %)';
+    document.getElementById('progressFill').style.width=pct+'%';
+    document.getElementById('progressBar').setAttribute('aria-valuenow',pct);
+    document.querySelectorAll('details.section').forEach(function(sec){
+      var badge=sec.querySelector('[data-badge]'); if(!badge) return;
+      var sb=Array.prototype.slice.call(sec.querySelectorAll('input[type=checkbox]'));
+      var d=sb.filter(function(b){return b.checked;}).length;
+      badge.textContent=d+'/'+sb.length;
+      badge.classList.toggle('full',d===sb.length&&sb.length>0);
+    });
+  }
+  boxes.forEach(function(b){ if(saved[b.id]) b.checked=true; b.addEventListener('change',function(){persist();refresh();}); });
+  document.getElementById('resetChecks').addEventListener('click',function(){ boxes.forEach(function(b){b.checked=false;}); persist(); refresh(); });
+  document.getElementById('expandAll').addEventListener('click',function(){ document.querySelectorAll('details.section').forEach(function(d){d.open=true;}); });
+  document.getElementById('collapseAll').addEventListener('click',function(){ document.querySelectorAll('details.section').forEach(function(d){d.open=false;}); });
+  document.querySelectorAll('nav.toc a').forEach(function(a){ a.addEventListener('click',function(){ var t=document.querySelector(a.getAttribute('href')); if(t&&t.tagName==='DETAILS') t.open=true; }); });
+  var links=Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  function spy(){ var best=null; links.forEach(function(a){ var s=document.querySelector(a.getAttribute('href')); if(s&&s.getBoundingClientRect().top<120) best=a; }); links.forEach(function(a){ a.classList.toggle('active',a===best); }); }
+  document.addEventListener('scroll',spy,{passive:true});
+  refresh(); spy();
+})();
+</script>
+</body>
+</html>
