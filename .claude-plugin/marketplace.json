@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Boîte à outils Claude Code pour la création de contenu de jeu de rôle sur table — scénarios, PNJ, factions, monstres, objets magiques, sorts custom, dons custom (feats 2024), donjons, encounters, tables aléatoires, audit éditorial, playtest, mise en marché, conversion entre systèmes (5e 2014 → 2024 / PF2e / OSR), audit mécanique de stat blocks, trois agents (ttrpg-publication-director pour le pipeline draft → launch ; scenario-architect pour concevoir un scénario via dialogue itératif ; bestiary-builder pour générer un bestiaire cohérent de 5-30 créatures avec framework écologique), et ressources francophones. D&D 5e (2024) par défaut, mais la plupart des skills sont system-agnostic.",
-    "version": "1.3.0"
+    "version": "1.4.0"
   },
   "plugins": [
     {

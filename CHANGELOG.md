@@ -2,6 +2,19 @@
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet adhère au [versioning sémantique](https://semver.org/lang/fr/) par plugin.
 
+## [1.4.0] — 2026-06-10
+
+### Ajouts
+
+- Plugin `ttrpg-creation` (v1.4.0) : `feat-creator` — trois nouvelles familles de briques dans `references/feat-effect-library.md`, issues du premier corpus d'usage réel (les 10 dons Zarathar, `examples/feat-creator-dons-zarathar.md`) :
+  - **Information Bricks** — closed oracle (étalon *Augury*, sortie ambiguë obligatoire), detection at range (catégorie nommée, passif seulement si rare), intent reading (fait défini d'avance, jet opposé, jamais de DD fixe), diagnostic (données mécaniques honnêtes). Monnaie de calibrage : questions fermées par repos (1/repos long ≈ ½ feat).
+  - **Bond & Companion Bricks** — shared senses (3 knobs : fréquence / action / cécité propre), telepathic tether (le contenu coûte plus que la portée), positional rider (vendre un angle, jamais l'avantage brut — anti-modèle Pack Tactics), the bond's price (clauses de rupture écrites, la moitié défensive du budget). Règle de famille : le compagnon de feat est un capteur, jamais un attaquant.
+  - **Debt & Observance Bricks** — observance gate (acte scénique vérifiable), capped inventory (plafond BM, contenu sans valeur mécanique, rétention scalant avec le stock), non-gold currency (fourchette de valeur obligatoire en Design Notes), debt hook (zéro math, la dette appartient au MJ). Règle de famille : ces régulateurs remplacent les patterns standard, jamais d'empilement.
+
+### Pourquoi (la boucle galerie → références)
+
+C'est la première itération du mécanisme prévu par `examples/README.md` : un output curé qui sert de point d'ancrage à un enrichissement de `references/`. Les 10 dons Zarathar ont révélé que la bibliothèque d'effets ne couvrait ni l'information comme bénéfice, ni le compagnon-capteur, ni les régulateurs narratifs de ressource — trois familles que l'usage réel produit spontanément et que le homebrew calibre mal faute d'étalons (l'information ne se mesure pas en DPR). Chaque section se clôt sur un renvoi vers l'exemple curé. Les Drawback riders (malédictions), signature du format maison Zarathar, restent volontairement hors du skill générique.
+
 ## [1.3.0] — 2026-06-10
 
 ### Ajouts
