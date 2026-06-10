@@ -48,6 +48,7 @@ Every background must include these elements in this exact order:
 - Name one 1st-level Origin feat
 - Either reference existing feat or create custom feat
 - Custom feats must follow 2024 origin feat design principles
+- For a fully designed custom Origin feat (mechanics, calibration, lore), delegate to the `feat-creator` skill — it is the authority on feat design; this skill then references the resulting feat by name
 
 ### 4. Skill Proficiencies
 - Choose two skills from a list of 3-4 options
